@@ -32,15 +32,22 @@ if [[ $data == "sub" ]]; then
                        	--chr $3 \
                        	--export hapslegend \
                        	--vcf $8 \
-                       	--out chr${3}${6}${7} \
+                       	--out ${6}${7}_chr${3} \
                        	--from-kb $4 \
                        	--to-kb $5 \
-                       	--keep $6.txt \
+                       	--keep $6 \
                        	--double-id
                        
-                       sed '1d' chr${3}${6}${7}.legend | \
-			       awk '{print $1"\t""11""\t"$2"\t"$4"\t"$3}' > chr${3}${6}${7}.map
-                       sed 's/0/2/g' chr${3}${6}${7}.haps > chr${3}${6}${7}.hap
+                         # Set awk variables
+                         a='$1"\\t"'
+                         b="\"$3\""
+                         c='"\\t"$2"\\t"$4"\\t"$3'
+
+                         echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
+
+                       sed '1d' ${6}${7}_chr${3}.legend | \
+			       awk -f awkProgFile.txt >  ${6}${7}_chr${3}.map
+                       sed 's/0/2/g'  ${6}${7}_chr${3}.haps >  ${6}${7}_chr${3}.hap
                     
                 elif [[ "$param" == "2" && $# != 5 ]]; then
              
@@ -53,13 +60,20 @@ if [[ $data == "sub" ]]; then
                          --chr $3 \
                          --export hapslegend \
                          --vcf $5 \
-                         --out chr$3$4 \
+                         --out $4_chr$3 \
                          --keep $4.txt \
                          --double-id
                       
-                       sed '1d' chr${3}${4}.legend | \
-			       awk '{print $1"\t""11""\t"$2"\t"$4"\t"$3}' > chr${3}${4}.map
-                       sed 's/0/2/g' chr${3}${4}.haps > chr${3}${4}.hap
+                         # Set awk variables
+                         a='$1"\\t"'
+                         b="\"$3\""
+                         c='"\\t"$2"\\t"$4"\\t"$3'
+
+                         echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
+
+                       sed '1d' ${4}_chr${3}.legend | \
+			       awk -f awkProgFile.txt > ${4}_chr${3}.map
+                       sed 's/0/2/g' ${4}_chr${3}.haps > ${4}_chr${3}.hap
                        
                 elif [[ "$param" == "3" && $# != 6 ]]; then
              
@@ -67,7 +81,7 @@ if [[ $data == "sub" ]]; then
              
                 elif [[ "$param" == "3" && $# == 6 ]]; then
              
-                       for chr in `(seq 1 $4)`; do
+                       for chr in $(seq 1 $4); do
                         
                 	      # Entire dataset with more than one chromosomes             
                                 plink2 \
@@ -75,7 +89,7 @@ if [[ $data == "sub" ]]; then
                                   --vcf $6 \
                                   --chr $chr \
                                   --keep $5 \
-                                  --out $3${chr} \
+                                  --out $3_chr${chr} \
                                   --double-id
                   
                                 # Set awk variables
@@ -85,16 +99,16 @@ if [[ $data == "sub" ]]; then
                   
                   	      echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
                   
-                                sed '1d' ${3}${chr}.legend | \
-                                        awk -f awkProgFile.txt > ${3}${chr}.map
-                                sed 's/0/2/g' ${3}${chr}.haps > ${3}${chr}.hap
+                                sed '1d' ${3}_chr${chr}.legend | \
+                                        awk -f awkProgFile.txt > ${3}_chr${chr}.map
+                                sed 's/0/2/g' ${3}_chr${chr}.haps > ${3}_chr${chr}.hap
                        done
              
-             	       for chr in `(seq 1 $4)`; do
+             	       for chr in $(seq 1 $4); do
              
-               	           if [[ -f "${3}${chr}.map" ]]; then
+               	           if [[ -f "${3}_chr${chr}.map" ]]; then
                	     
-               		       awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$5}' ${3}${chr}.map; 
+               		       awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$5}' ${3}_chr${chr}.map; 
                	   
                		   fi
                  
@@ -107,8 +121,11 @@ if [[ $data == "sub" ]]; then
                        rm ${file}
                     fi
                 done
-       
-             
+
+                    if [[ ! -s snp.info ]]; then
+                          rm snp.info
+                    fi
+    
            fi
 
 elif [[ $data == "all" ]]; then
@@ -131,32 +148,46 @@ elif [[ $data == "all" ]]; then
                               --chr $3 \
                               --export hapslegend \
                               --vcf $8 \
-                              --out chr${3}${6}${7} \
+                              --out ${6}${7}_chr${3} \
                               --from-kb $4 \
                               --to-kb $5 \
                               --double-id
-               
-                        sed '1d' chr${3}${6}${7}.legend | awk '{print $1"\t""11""\t"$2"\t"$4"\t"$3}' > chr${3}${6}${7}.map
-                        sed 's/0/2/g' chr${3}${6}${7}.haps > chr${3}${6}${7}.hap
+
+                         # Set awk variables
+                         a='$1"\\t"'
+                         b="\"$3\""
+                         c='"\\t"$2"\\t"$4"\\t"$3'
+
+                         echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt	
+
+                        sed '1d' ${6}${7}_chr${3}.legend | \
+				awk -f awkProgFile.txt > ${6}${7}_chr${3}.map
+                        sed 's/0/2/g' ${6}${7}_chr${3}.haps > ${6}${7}_chr${3}.hap
           
                 elif [[ "$param" == "2" && $# != 5 ]]; then
          
             	       $progg
-         
-          
+                   
                 elif [[ "$param" == "2" && $# == 5 ]]; then
          
                         # Entire chromosome
                         plink2 \
-                          --chr $3 \
+                          --chr $4 \
                           --export hapslegend \
                           --vcf $5 \
-                          --out chr$3$4 \
+                          --out $3_chr$4 \
                           --double-id
                
-                        sed '1d' chr${3}${4}.legend | awk '{print $1"\t""11""\t"$2"\t"$4"\t"$3}' > chr${3}${4}.map
-                        sed 's/0/2/g' chr${3}${4}.haps > chr${3}${4}.hap
-          
+                         # Set awk variables
+                         a='$1"\\t"'
+                         b="\"$4\""
+                         c='"\\t"$2"\\t"$4"\\t"$3'
+
+                         echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
+
+                        sed '1d' $3_chr$4.legend | \
+				awk -f awkProgFile.txt > $3_chr$4.map
+                        sed 's/0/2/g' $3_chr$4.haps > $3_chr$4.hap          
           
                 elif [[ "$param" == "3" && $# != 5 ]]; then
          
@@ -164,14 +195,14 @@ elif [[ $data == "all" ]]; then
          
                 elif [[ "$param" == "3" && $# == 5 ]]; then
          
-                   for chr in `(seq 1 $4)`; do
+                   for chr in $(seq 1 $4); do
                	
 			 # Entire dataset with more than one chromosomes
                          plink2 \
                            --export hapslegend \
                            --vcf $5 \
                	           --chr $chr \
-                           --out $3${chr} \
+                           --out $3_chr${chr} \
                            --double-id
                
                  	 # Set awk variables
@@ -181,30 +212,34 @@ elif [[ $data == "all" ]]; then
                  
                  	 echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
                
-                         sed '1d' ${3}${chr}.legend | \
-				 awk -f awkProgFile.txt > ${3}${chr}.map
-                         sed 's/0/2/g' ${3}${chr}.haps > ${3}${chr}.hap
-               
+                         sed '1d' $3_chr${chr}.legend | \
+				 awk -f awkProgFile.txt > $3_chr${chr}.map
+                         sed 's/0/2/g' $3_chr${chr}.haps > $3_chr${chr}.hap
+
                    done
-         
+       
+                   for chr in $(seq 1 $4); do
+
+                       if [[ -f "$3_chr${chr}.map" ]]; then
+
+                          awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$5}' $3_chr${chr}.map
+
+                       fi
+
+                   done > snp.info
+
+                    if [[ ! -s snp.info ]]; then
+                         rm snp.info
+                    fi       
+
                 fi
          
-                for file in *.log *.sample *.legend *.haps awkProgFile.txt; do
-                    if [[ -f ${file} ]]; then
-                       rm ${file}
-                    fi
-                done
+                    for file in *.log *.sample *.legend *.haps awkProgFile.txt; do
+                        if [[ -f ${file} ]]; then
+                           rm ${file}
+                        fi
+                    done
          
-                   for chr in `(seq 1 $4)`; do
-         
-                       if [[ -f "${3}${chr}.map" ]]; then
-         
-                        awk '{print $1"\t"$2"\t"$3"\t"$4"\t"$5}' ${3}${chr}.map
-         
-         	      fi
-       	   
-                 done > snp.info
-       
            fi
 
 else

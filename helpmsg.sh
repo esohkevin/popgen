@@ -109,13 +109,13 @@ elif [[ $signal == "6" ]]; then
 elif [[ $signal == "7" ]]; then
 
       echo """
-          Usage: ./phased_vcf2rehh.sh 'all' 2 <chr#> <pop-name> <input-VCF>
+          Usage: ./phased_vcf2rehh.sh 'all' 2 <outname> <chr#> <input-VCF>
 
 	  		   Working with a whole single chromosome
                         -------------------------------------------
 
-                                chr#: The chromosome you wish to work with (e.g. 11 for chromosome 11)
                              outname: The output file name prefix
+                                chr#: The chromosome you wish to work with (e.g. 11 for chromosome 11)
                            input-VCF: The input phased VCF dataset (e.g. data.vcf or data.vcf.gz)
 
            """

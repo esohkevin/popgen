@@ -17,17 +17,18 @@ if [[ $param == [12] ]]; then
 
         Rscript scanPart.R $2 $3 $4
 
-   elif [[ $param == "2" && $# != 3 ]]; then
+   elif [[ $param == "2" && $# != 4 ]]; then
         echo """
-             Usage: ./scanFull.R 2 <.hap+.map-root> <output>
+             Usage: ./scanFull.R 2 <.hap+.map-root> <output> <#chr>
 
 	        .hap+.map-root: The hap and map file prefix (e.g. for chrA.hap and chrA.map, enter chrA)
 		        output: The output file name
+		 	  #chr: The total number of chromosomes 
         """
 
-   elif [[ $param == "2" && $# == 3 ]]; then
+   elif [[ $param == "2" && $# == 4 ]]; then
 
-        Rscript scanFull.R $2 $3
+        Rscript scanFull.R $2 $3 $4
   
    fi
 
