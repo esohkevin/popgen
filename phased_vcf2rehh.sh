@@ -32,7 +32,7 @@ if [[ $data == "sub" ]]; then
                        	--chr $3 \
                        	--export hapslegend \
                        	--vcf $8 \
-                       	--out ${6}${7}_chr${3} \
+                       	--out ${6/.*}${7}_chr${3} \
                        	--from-kb $4 \
                        	--to-kb $5 \
                        	--keep $6 \
@@ -45,9 +45,9 @@ if [[ $data == "sub" ]]; then
 
                          echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
 
-                       sed '1d' ${6}${7}_chr${3}.legend | \
-			       awk -f awkProgFile.txt >  ${6}${7}_chr${3}.map
-                       sed 's/0/2/g'  ${6}${7}_chr${3}.haps >  ${6}${7}_chr${3}.hap
+                       sed '1d' ${6/.*}${7}_chr${3}.legend | \
+			       awk -f awkProgFile.txt >  ${6/.*}${7}_chr${3}.map
+                       sed 's/0/2/g'  ${6/.*}${7}_chr${3}.haps >  ${6/.*}${7}_chr${3}.hap
                     
                 elif [[ "$param" == "2" && $# != 5 ]]; then
              
@@ -60,8 +60,8 @@ if [[ $data == "sub" ]]; then
                          --chr $3 \
                          --export hapslegend \
                          --vcf $5 \
-                         --out $4_chr$3 \
-                         --keep $4.txt \
+                         --out ${4/.*}_chr$3 \
+                         --keep ${4} \
                          --double-id
                       
                          # Set awk variables
@@ -71,9 +71,9 @@ if [[ $data == "sub" ]]; then
 
                          echo "{print `awk -v vara="$a" -v varb="$b" -v varc="$c" 'BEGIN{print vara varb varc}'`}" > awkProgFile.txt
 
-                       sed '1d' ${4}_chr${3}.legend | \
-			       awk -f awkProgFile.txt > ${4}_chr${3}.map
-                       sed 's/0/2/g' ${4}_chr${3}.haps > ${4}_chr${3}.hap
+                       sed '1d' ${4/.*}_chr${3}.legend | \
+			       awk -f awkProgFile.txt > ${4/.*}_chr${3}.map
+                       sed 's/0/2/g' ${4/.*}_chr${3}.haps > ${4/.*}_chr${3}.hap
                        
                 elif [[ "$param" == "3" && $# != 6 ]]; then
              
@@ -88,7 +88,7 @@ if [[ $data == "sub" ]]; then
                                   --export hapslegend \
                                   --vcf $6 \
                                   --chr $chr \
-                                  --keep $5 \
+                                  --keep ${5} \
                                   --out $3_chr${chr} \
                                   --double-id
                   
@@ -122,7 +122,7 @@ if [[ $data == "sub" ]]; then
                     fi
                 done
 
-                    if [[ ! -s snp.info ]]; then
+                    if [[ -f "snp.info" && ! -s snp.info ]]; then
                           rm snp.info
                     fi
     
@@ -228,7 +228,7 @@ elif [[ $data == "all" ]]; then
 
                    done > snp.info
 
-                    if [[ ! -s snp.info ]]; then
+                    if [[ -f "snp.info" && ! -s snp.info ]]; then
                          rm snp.info
                     fi       
 
