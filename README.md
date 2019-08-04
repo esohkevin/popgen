@@ -42,7 +42,7 @@ Data Stratification
 1. Biallelic core SNPs that pass all filters (VSQLOD>0)
 2. Biallelic CDS
 3. Biallelic core SNPs that pass all filters and are segregating within the populations (VSQLOD>0 && AC>0)
-4. Biallelic core SNPs with high quality (VSQLOD>0 && AC>0)
+4. Biallelic core SNPs with high quality (VSQLOD>6 && AC>0)
 5. Biallelic core SNPs with high quality and are segregating within the populations (VSQLOD>6 && AC>0)
 
 
@@ -65,4 +65,5 @@ Analaysis Measures/Statistics
    * iHS
    * EHH
 
-
+- Tajima's D (on segregating sites)
+- 
