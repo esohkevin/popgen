@@ -225,7 +225,7 @@ vcf="$1"
 # To create a vcf file which contains only PASS bi-allelic coding SNPs with
 # VQSLOD > 6 that are segregating:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && CDS==1 && TYPE="snp" && VQSLOD>6.0 && AC>0' \
+--include 'FILTER="PASS" && N_ALT=1 && CDS==1 && TYPE="snp" && VQSLOD>6.0' \
 --output-type z \
 --output-file pass_bi_cds_${vcf} \
 ${vcf}
@@ -234,7 +234,7 @@ bcftools index --tbi pass_bi_cds_${vcf}
 # To create a vcf file which contains only PASS bi-allelic core SNPs with
 # VQSLOD > 0 that are segregating:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && VQSLOD>0.0 && AC>0' \
+--include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && VQSLOD>0.0' \
 --output-type z \
 --output-file pass_bi_core_${vcf} \
 ${vcf}
@@ -245,9 +245,37 @@ bcftools index --tbi pass_bi_core_${vcf}
 bcftools view \
 --include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && VQSLOD>6.0' \
 --output-type z \
---output-file pass_bi_core_${vcf} \
+--output-file hq_bi_core_${vcf} \
 ${vcf}
-bcftools index --tbi pass_bi_core_${vcf}
+bcftools index --tbi hq_bi_core_${vcf}
+
+
+# To create a vcf file which contains only PASS bi-allelic coding SNPs with
+# VQSLOD > 6 that are segregating:
+bcftools view \
+--include 'FILTER="PASS" && N_ALT=1 && CDS==1 && TYPE="snp" && VQSLOD>6.0 && AC>0' \
+--output-type z \
+--output-file pass_biseg_cds_${vcf} \
+${vcf}
+bcftools index --tbi pass_biseg_cds_${vcf}
+
+# To create a vcf file which contains only PASS bi-allelic core SNPs with
+# VQSLOD > 0 that are segregating:
+bcftools view \
+--include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && VQSLOD>0.0 && AC>0' \
+--output-type z \
+--output-file pass_biseg_core_${vcf} \
+${vcf}
+bcftools index --tbi pass_biseg_core_${vcf}
+
+# To create a vcf file which contains only PASS bi-allelic core SNPs and INDELS with
+# VQSLOD > 0:
+bcftools view \
+--include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && VQSLOD>6.0 && AC>0' \
+--output-type z \
+--output-file hq_biseg_core_${vcf} \
+${vcf}
+bcftools index --tbi hq_biseg_core_${vcf}
 
 
 ## # To extract diploid genotype calls for biallelic PASS SNPs in gene MDR1 into a
