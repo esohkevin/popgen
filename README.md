@@ -72,34 +72,34 @@ Pipeline
 ---
 Merge single chromosomes into one file
 ```
-	./mergePlaf.sh <file> <output>
+./mergePlaf.sh <file> <output>
 ``` 
 
 Update chromosome and snp IDs so that plink does not spill out errors
 ```
-	./updatePlafIDs.sh <merged-vcf>
+./updatePlafIDs.sh <merged-vcf>
 ```
 
 Extract data for analysis as outlined above
 ```
-	./extract_data.sh <updated-vcf>
+./extract_data.sh <updated-vcf>
 ```
 
 Phase extracted data with BEAGLE v5.0
 ```
-	./beaglePhase.sh <extracted-vcf> <output-prefix>
+./beaglePhase.sh <extracted-vcf> <output-prefix>
 ```
 
 Convert phased haplotypes in VCF to rehh format (.hap+.map)
 ```
-	./phased_vcf2rehh.sh -h 
+./phased_vcf2rehh.sh -h 
 ```
 
 Get help for using the script by typing '-h' on the commandline
 
 Run scan for selection
 ```
-	./runScan.sh
+./runScan.sh
 ```
 
 Just hit 'enter' and the script will guide you through
