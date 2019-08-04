@@ -2,6 +2,13 @@
 
 
 if [[ $# == 2 ]]; then
+   
+   for file in $(cat $1); do
+
+      tabix -f -p vcf $file
+
+   done
+
    bcftools concat -f ${1} -a -d all -Oz -o ${2}.vcf.gz
 
    tabix -f -p vcf ${2}.vcf.gz
