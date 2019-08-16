@@ -7,3 +7,4 @@ mkdir -p ~/bin		# -p is extremely important to make sure that your
 cp plink2 ~/bin/
 
 
+
