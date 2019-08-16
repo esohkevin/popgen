@@ -1,9 +1,12 @@
 #!/bin/bash
 
+vcf="$1"
+ref="$2"
+
 plink2 \
-   --vcf phased_bipass.vcf.gz \
+   --vcf $vcf \
    --keep-allele-order \
-   --ref-from-fa PlasmoDB-44_PreichenowiCDC_Genome.fasta \
-   --export vcf-4.2 \
-   --out phased_bipass_tref
+   --ref-from-fa $ref \
+   --export vcf-4.2 bgz \
+   --out ${vcf/.vcf.gz/_bipass_tref}
 
