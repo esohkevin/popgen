@@ -1,5 +1,5 @@
 #!/usr/bin/Rscript
-setwd("~/popgen/")
+#setwd("~/popgen/")
 
 library(rehh)
 
