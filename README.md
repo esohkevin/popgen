@@ -1,9 +1,13 @@
 Population Genetics Tool
 ---
-
+- Extract dataset as described below
+- LDhat: Model recombination map of dataset to get average recomb rate to use with hmmIBD
+- hmmIBD: Compute on QC-ed data with computed average recomb rate. Obtain dataset for east Asian pops and compute, then plot
+  to asses cross-poplation IBD as in 
+  [https://malariajournal.biomedcentral.com/articles/10.1186/s12936-018-2349-7#Tab1](Schaffner et al., \(2018\)). 
 - Population Structure Analysis
 - Selection Scan (iHS, EHH)
-- LDhat (Model recombination map)
+- 
 - Fst
 - LD
 - MAF
