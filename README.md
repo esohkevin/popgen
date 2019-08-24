@@ -3,7 +3,7 @@ Population Genetics Tool
 
 - Population Structure Analysis
 - Selection Scan (iHS, EHH)
-- LDhat
+- LDhat (Model recombination map)
 - Fst
 - LD
 - MAF
