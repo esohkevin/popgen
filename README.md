@@ -3,6 +3,7 @@ Population Genetics Tool
 
 - Population Structure Analysis
 - Selection Scan (iHS, EHH)
+- LDhat
 - Fst
 - LD
 - MAF
