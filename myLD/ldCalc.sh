@@ -24,6 +24,7 @@ do
 ## split vcf
 vcftools --gzvcf $vcf2use \
 	--recode \
+	--maf 0.05 \
 	--out chr$i
 
 ## calculate LD
