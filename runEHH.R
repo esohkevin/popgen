@@ -1,5 +1,5 @@
 #!/usr/bin/Rscript
-setwd("~/popgen/")
+#setwd("~/popgen/")
 
 library(rehh)
 
@@ -45,11 +45,11 @@ for (locus in pos) {
   
   
   # Calculate furcation
-  png(bifurc, height = 700, width = 640, res = NA, units = "px", type = "cairo")
-  layout(matrix(1:2,2,1))
   furc <- calc_furcation(hap, mrk = locus, allele = NULL, limhaplo = 2, 
                          phased = TRUE, polarized = TRUE)
   
+  png(bifurc, height = 700, width = 640, res = NA, units = "px", type = "cairo")
+  layout(matrix(1:2,2,1))  
   plot(furc)
   plot(ehh)
   dev.off()

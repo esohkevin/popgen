@@ -84,10 +84,10 @@ boot.outline <- function(LDdf, nbins, binsize) {
 ############ INPUT DATA ############
 ####################################
 
-ld1 <- read.table("pointestimates/ld/cp1.ld.1-100000.hap.ld", header = TRUE)
-ld2 <- read.table("pointestimates/ld/cp2.ld.1-100000.hap.ld", header = TRUE)
-ld3 <- read.table("pointestimates/ld/cp3.ld.1-100000.hap.ld", header = TRUE)
-ld4 <- read.table("pointestimates/ld/cp4.ld.1-100000.hap.ld", header = TRUE)
+ld1 <- read.table("pointestimates/ld/chr1.ld.1-100000.hap.ld", header = TRUE)
+ld2 <- read.table("pointestimates/ld/chr2.ld.1-100000.hap.ld", header = TRUE)
+ld3 <- read.table("pointestimates/ld/chr3.ld.1-100000.hap.ld", header = TRUE)
+ld4 <- read.table("pointestimates/ld/chr4.ld.1-100000.hap.ld", header = TRUE)
 
 ldpv <- read.table("pv-10000.hap.ld", header = TRUE)
 

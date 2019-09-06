@@ -1,8 +1,15 @@
 Population Genetics Tool
 ---
-
+- Perform generic plink IBD and remove duplicates of samples (Sample duplications should obviously influence allele frequency)
+- Compute allele frequencies (Ref/Alt) for entire dataset and save into text files for subsequent use 
+- Extract specific sub-dataset as described below
+- LDhat: Model recombination map of dataset to get average recomb rate to use with hmmIBD
+- hmmIBD: Compute on QC-ed data with computed average recomb rate. Obtain dataset for east Asian pops and compute, then plot
+  to asses cross-poplation IBD as in 
+  [Schaffner *et al.,* \(2018\)](https://malariajournal.biomedcentral.com/articles/10.1186/s12936-018-2349-7#Tab1)
 - Population Structure Analysis
 - Selection Scan (iHS, EHH)
+- 
 - Fst
 - LD
 - MAF
