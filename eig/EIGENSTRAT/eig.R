@@ -1,18 +1,15 @@
 #!/usr/bin/Rscript
 
-#setwd("~/Git/popgen/eig/EIGENSTRAT/")
-#fn <- "passbicore.pca.evec"
+setwd("~/Git/popgen/eig/EIGENSTRAT/")
+fn <- "passbicore.pca.evec"
 
 #--------- Save evec data into placeholder
 require(colorspace)
+
 args <- commandArgs(TRUE)
 fm <- args[1]
 fn <- paste(fm, ".pca.evec", sep="")
-out_plot1 <- paste(fm, "-age.png", sep="")
-out_plot2 <- paste(fm, "-alt.png", sep="")
-out_plot3 <- paste(fm, "-stat.png", sep="")
-out_plot4 <- paste(fm, "-sex.png", sep="")
-out_plot5 <- paste(fm, "-para.png", sep="")
+out <- paste0(fm, ".png")
 
 plaf_pca <- read.table(fn, header=F, as.is=T)
 
@@ -28,34 +25,7 @@ pheno <- read.table("../CONVERTF/pheno.txt", header=T)
 plaf_merge <- merge(plaf_pca, pheno, by="Sample")
 attach(plaf_merge)
 
-#----- Make Age Categories
-plaf_merge$DAGE <- as.numeric(DAGE)
-attach(plaf_merge)
-
-plaf_merge$DAGECAT <- ifelse(DAGE <= 60, "Under5",
-                             ifelse(DAGE > 60 &
-                                      DAGE < 216, "MidAge",
-                                    ifelse(DAGE >= 216, "Adult",
-                                           "NA")))
-
-#----- Make Parasitemia Categories
-plaf_merge$PARA <- as.numeric(PARA)
-attach(plaf_merge)
-
-plaf_merge$PARACAT <- ifelse(PARA <= 10000, "Low",
-                             ifelse(PARA > 10000 &
-                                      PARA < 250000, "Moderate",
-                                    ifelse(PARA >= 250000, "High",
-                                           "NA")))
-
-#----- Make Gender Categories
-attach(plaf_merge)
-plaf_merge$DSEX <- ifelse(DSEX == "Female", "F",
-                             ifelse(DSEX == "Male", "M", 
-                                    "NA"))
-
 #------ Save a copy of the updated merged file
-attach(plaf_merge)
 write.table(plaf_merge, file = "merged.pca.evec", col.names = T, 
             row.names = F, quote = F, sep = '\t')
 
@@ -66,130 +36,123 @@ plaf_merge$Status <- as.factor(plaf_merge$Status)
 plaf_merge$DSEX <- as.factor(plaf_merge$DSEX)
 plaf_merge$PARACAT <- as.factor(plaf_merge$PARACAT)
 
+#---Set image parameters
+png(out, height = 18, width = 26, units = "cm", res = 100, points = 14)
+par(mfrow = c(2,3))
+
 #-------Extract only non-missing data of current categories to plot
-attach(plaf_merge)
 #---Age
-aged <- na.omit(plaf_merge[DAGECAT == "Under5" || DAGECAT == "MidAge" || DAGECAT == "Adult", ])
-attach(aged)
-age_lev <- levels(DAGECAT)
+aged <- na.omit(plaf_merge[plaf_merge$DAGECAT == "Under5" || 
+                             plaf_merge$DAGECAT == "MidAge" || plaf_merge$
+                             DAGECAT == "Adult", ])
+
+age_lev <- levels(aged$DAGECAT)
 n <- length(age_lev)
 popcol <- qualitative_hcl(n, "Dark 3")
-png(out_plot1, height = 16, width = 16,
-    res = 100, units = "cm", points = 12)
-plot(PC1, PC2, pch = 20, xlab = "PC1", 
-     main = "PCA colored by Age Group", ylab = "PC2")
-d <- aged[DAGECAT == "Adult",]
+plot(aged$PC1, aged$PC2, pch = 20, xlab = "PC1", 
+     main = "Colored by Donor Age Group", ylab = "PC2")
+d <- aged[aged$DAGECAT == "Adult",]
 points(d$PC1,d$PC2, col=popcol[1], pch=20)
-d <- aged[DAGECAT == "MidAge", ]
+d <- aged[aged$DAGECAT == "MidAge", ]
 points(d$PC1,d$PC2, col=popcol[2], pch=20)
-d <- aged[DAGECAT == "Under5", ]
+d <- aged[aged$DAGECAT == "Under5", ]
 points(d$PC1,d$PC2, col=popcol[3], pch=20)
 legend("topright",
-       legend=levels(DAGECAT),
+       legend=levels(aged$DAGECAT),
        col=popcol,
        pch=20,
        bty="l",
        horiz = F,
        cex = 0.8)
-dev.off()
+#dev.off()
 
 #---Altitude
-attach(plaf_merge)
-altd <- na.omit(plaf_merge[ALTCAT=="High" || ALTCAT=="Moderate" || ALTCAT=="LOW", ])
-attach(altd)
-alt_lev <- levels(ALTCAT)
+altd <- na.omit(plaf_merge[plaf_merge$ALTCAT=="High" || 
+                             plaf_merge$ALTCAT=="Moderate" || 
+                             plaf_merge$ALTCAT=="LOW", ])
+
+alt_lev <- levels(plaf_merge$ALTCAT)
 n <- length(alt_lev)
 popcol <- qualitative_hcl(n, "Dark 3")
-png(out_plot2, height = 16, width = 16,
-    res = 100, units = "cm", points = 12)
-plot(PC1, PC2, pch = 20, xlab = "PC1",
-    main="PCA colored by Altitude", ylab = "PC2")
-d <- altd[ALTCAT == "High",]
+plot(altd$PC1, altd$PC2, pch = 20, xlab = "PC1",
+    main="Colored by Altitude", ylab = "PC2")
+d <- altd[altd$ALTCAT == "High",]
 points(d$PC1,d$PC2, col=popcol[1], pch=20)
-d <- altd[ALTCAT == "Low", ]
+d <- altd[altd$ALTCAT == "Low", ]
 points(d$PC1,d$PC2, col=popcol[2], pch=20)
-d <- altd[ALTCAT == "Moderate", ]
+d <- altd[altd$ALTCAT == "Moderate", ]
 points(d$PC1,d$PC2, col=popcol[3], pch=20)
 legend("topright",
-       legend=levels(ALTCAT),
+       legend=levels(altd$ALTCAT),
        col=popcol,
        pch=20,
        bty="l",
        horiz = F,
        cex = 0.8)
-dev.off()
+#dev.off()
 
 #---Status (uncomplicated and asymptomatic)
-attach(plaf_merge)
-stat <- na.omit(plaf_merge[Status=="UM" || Status=="AP",])
-attach(stat)
-stat_lev <- levels(Status)
+stat <- na.omit(plaf_merge[plaf_merge$Status=="UM" || 
+                             plaf_merge$Status=="AP",])
+
+stat_lev <- levels(stat$Status)
 n <- length(stat_lev)
 popcol <- qualitative_hcl(n, "Dark 3")
-png(out_plot3, height = 16, width = 16,
-    res = 100, units = "cm", points = 12)
-plot(PC1, PC2, pch = 20, xlab = "PC1",
-    main="PCA colored by Donor Status", ylab = "PC2")
-d <- stat[Status == "AP",]
+plot(stat$PC1, stat$PC2, pch = 20, xlab = "PC1",
+    main="Colored by Donor Status", ylab = "PC2")
+d <- stat[stat$Status == "AP",]
 points(d$PC1,d$PC2, col=popcol[1], pch=20)
-d <- stat[Status == "UM", ]
+d <- stat[stat$Status == "UM", ]
 points(d$PC1,d$PC2, col=popcol[2], pch=20)
-#d <- stat[Status == "Moderate", ]
-#points(d$PC1,d$PC2, col=popcol[3], pch=20)
 legend("topright",
-       legend=levels(Status),
+       legend=levels(stat$Status),
        col=popcol,
        pch=20,
        bty="l",
        horiz = F,
        cex = 0.8)
-dev.off()
-
-#---Status (uncomplicated and asymptomatic)
-attach(plaf_merge)
-dsex <- na.omit(plaf_merge[DSEX=="F" || DSEX=="M",])
-attach(dsex)
-dsex_lev <- levels(DSEX)
-n <- length(dsex_lev)
-popcol <- qualitative_hcl(n, "Dark 3")
-png(out_plot4, height = 16, width = 16,
-    res = 100, units = "cm", points = 12)
-plot(PC1, PC2, pch = 20, xlab = "PC1",
-     main="PCA colored by Donor Gender", ylab = "PC2")
-d <- dsex[DSEX == "F",]
-points(d$PC1,d$PC2, col=popcol[1], pch=20)
-d <- dsex[DSEX == "M", ]
-points(d$PC1,d$PC2, col=popcol[2], pch=20)
-#d <- stat[Status == "Moderate", ]
-#points(d$PC1,d$PC2, col=popcol[3], pch=20)
-legend("topright",
-       legend=levels(DSEX),
-       col=popcol,
-       pch=20,
-       bty="l",
-       horiz = F,
-       cex = 0.8)
-dev.off()
+#dev.off()
 
 #---Parasitemia
-attach(plaf_merge)
-parat <- na.omit(plaf_merge[PARACAT=="High" || PARACAT=="Moderate" || PARACAT=="Low", ])
-attach(parat)
-parat_lev <- levels(PARACAT)
+parat <- na.omit(plaf_merge[plaf_merge$PARACAT=="High" || 
+                              plaf_merge$PARACAT=="Moderate" || 
+                              plaf_merge$PARACAT=="Low", ])
+
+parat_lev <- levels(parat$PARACAT)
 n <- length(parat_lev)
 popcol <- qualitative_hcl(n, "Dark 3")
-png(out_plot5, height = 16, width = 16,
-    res = 100, units = "cm", points = 12)
-plot(PC1, PC2, pch = 20, xlab = "PC1",
-    main="PCA colored by Parasitemia Category", ylab = "PC2")
-d <- parat[PARACAT == "High",]
+plot(parat$PC1, parat$PC2, pch = 20, xlab = "PC1",
+     main="Colored by Parasitemia", ylab = "PC2")
+d <- parat[parat$PARACAT == "High",]
 points(d$PC1,d$PC2, col=popcol[1], pch=20)
-d <- parat[PARACAT == "Low", ]
+d <- parat[parat$PARACAT == "Low", ]
 points(d$PC1,d$PC2, col=popcol[2], pch=20)
-d <- parat[PARACAT == "Moderate", ]
+d <- parat[parat$PARACAT == "Moderate", ]
 points(d$PC1,d$PC2, col=popcol[3], pch=20)
 legend("topright",
-       legend=levels(PARACAT),
+       legend=levels(parat$PARACAT),
+       col=popcol,
+       pch=20,
+       bty="l",
+       horiz = F,
+       cex = 0.8)
+#dev.off()
+
+#---Status (uncomplicated and asymptomatic)
+dsex <- na.omit(plaf_merge[plaf_merge$DSEX=="F" || 
+                             plaf_merge$DSEX=="M",])
+
+dsex_lev <- levels(plaf_merge$DSEX)
+n <- length(dsex_lev)
+popcol <- qualitative_hcl(n, "Dark 3")
+plot(dsex$PC1, dsex$PC2, pch = 20, xlab = "PC1",
+     main="Colored by Donor Gender", ylab = "PC2")
+d <- dsex[dsex$DSEX == "F",]
+points(d$PC1,d$PC2, col=popcol[1], pch=20)
+d <- dsex[dsex$DSEX == "M", ]
+points(d$PC1,d$PC2, col=popcol[2], pch=20)
+legend("topright",
+       legend=levels(dsex$DSEX),
        col=popcol,
        pch=20,
        bty="l",
