@@ -26,3 +26,15 @@ vcftools \
     --TajimaD 50 \
     --maf 0.05 \
     --out bipaseg
+
+# Compute relatedness statistic
+vcftools \
+    --gzvcf pass_bi_core_Pf3D7_all_v3_updated.vcf.gz \
+    --relatedness \
+    --maf 0.05 \
+    --out plaf
+
+# Extract samples with AJK > 0.5 & < 1 where id1 != id2
+awk '$3>0.5 && $3<1 && $1!=$2' plaf.relatedness > plaf.related.txt
+
+
