@@ -9,6 +9,8 @@ if [[ $# == 4 ]]; then
 
     #-------Set variables
     in_vcf="$1"
+    bname="$(basename $in_vcf)"
+    out_vcf="${bname/.vcf.gz/_qc}"
     ld="$2"
     maf="$3"
     geno="$4"
@@ -77,11 +79,16 @@ if [[ $# == 4 ]]; then
     plink1.9 \
     	--bfile temp2 \
     	--allow-no-sex \
-    	--maf 0.01 \
+    	--maf $maf \
     	--geno ${geno} \
     	--make-bed \
-    	--out qc-data
-    
+    	--out temp3
+
+    plink1.9 \
+	--bfile temp3 \
+	--recode vcf-fid bgz \
+	--out ${out_vcf}
+
     rm temp*
 else
     echo """
