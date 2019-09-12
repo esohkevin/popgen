@@ -6,7 +6,7 @@ if [[ $# == 1 ]]; then
    Rscript -e 'source("~/Git/popgen/eig/EIGENSTRAT/eig-fst.R"); evec_plot(evec_root = c("agebest","altbest","statbest","parabest","dsexbest"), pheno_file = "../CONVERTF/pheno.txt", out_name = "pca-fst")'
 
 
-   #Rscript eig.R $1
+   Rscript eig.R $1
 
 #   mv *.png ../../../images/
 

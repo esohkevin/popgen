@@ -12,7 +12,7 @@ if [[ $1 == "sub" ]]; then
         # Prune the qc-dataset for SNPs within 50bp with r^2 < 0.2 using a window of 5 SNPs
         plink \
             --vcf "${vcf}" \
-            --indep-pairwise 5k 5 0.05 \
+            --indep-pairwise 50 10 0.2 \
             --allow-no-sex \
             --keep ${samfile} \
             --keep-allele-order \
@@ -71,7 +71,7 @@ elif [[ $1 == "all" ]]; then
         # Prune the qc-dataset for SNPs within 50bp with r^2 < 0.2 using a window of 5 SNPs
         plink \
             --vcf "${vcf}" \
-            --indep-pairwise 5k 5 0.05 \
+            --indep-pairwise 50 10 0.2 \
             --allow-no-sex \
             --autosome \
 	    --double-id \
