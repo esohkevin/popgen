@@ -1,7 +1,7 @@
 #!/usr/bin/Rscript
 
-setwd("~/Git/popgen/eig/EIGENSTRAT/")
-fn <- "passbicore.pca.evec"
+#setwd("~/Git/popgen/eig/EIGENSTRAT/")
+#fn <- "passbicore.pca.evec"
 
 #--------- Save evec data into placeholder
 require(colorspace)
