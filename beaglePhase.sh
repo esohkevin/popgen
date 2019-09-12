@@ -2,7 +2,7 @@
 
 if [[ $# == 2 ]]; then
 
-   java -jar beagle.12Jul19.0df.jar \
+    beagle \
 	gt=${1} \
 	out=${2} \
 	burnin=10 \

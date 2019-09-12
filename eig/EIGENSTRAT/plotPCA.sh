@@ -2,7 +2,11 @@
 
 
 if [[ $# == 1 ]]; then
-   Rscript eig.R $1
+   
+   Rscript -e 'source("~/Git/popgen/eig/EIGENSTRAT/eig-fst.R"); evec_plot(evec_root = c("agebest","altbest","statbest","parabest","dsexbest"), pheno_file = "../CONVERTF/pheno.txt", out_name = "pca-fst")'
+
+
+   #Rscript eig.R $1
 
 #   mv *.png ../../../images/
 
@@ -15,7 +19,7 @@ if [[ $# == 1 ]]; then
 
 else 
    echo """
-	Usage: ./plotPCA.sh <evec-input>
+	Usage: ./plotPCA.sh <evec-base>
    """
 
 fi
