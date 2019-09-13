@@ -196,9 +196,9 @@ vcf="$1"
 ## 
 ## # To extract chromosome, position, reference allele, all alternate alleles,
 ## # filter value and VQSLOD for all variants into a tab-delimited file:
- bcftools query -f \
- '%CHROM\t%POS\t%REF\t%ALT{0}\t%ALT{1}\t%ALT{2}\t%ALT{3}\t%ALT{4}\t%ALT{5}\t%FILTER\t%VQSLOD\n' \
- ${vcf} > all_variants.txt
+# bcftools query -f \
+# '%CHROM\t%POS\t%REF\t%ALT{0}\t%ALT{1}\t%ALT{2}\t%ALT{3}\t%ALT{4}\t%ALT{5}\t%FILTER\t%VQSLOD\n' \
+# ${vcf} > all_variants.txt
 ## 
 ## # To extract chromosome, position, reference allele, all alternate alleles and
 ## # VQSLOD for PASS SNPs only into a tab-delimited file:
@@ -234,7 +234,7 @@ bcftools index --tbi pass_bi_cds_${vcf}
 # To create a vcf file which contains only PASS bi-allelic core SNPs with
 # VQSLOD > 0 that are segregating:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && VQSLOD>0.0' \
+--include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>0.0' \
 --output-type z \
 --output-file pass_bi_core_${vcf} \
 ${vcf}
@@ -243,7 +243,7 @@ bcftools index --tbi pass_bi_core_${vcf}
 # To create a vcf file which contains only PASS bi-allelic core SNPs and INDELS with
 # VQSLOD > 0:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && VQSLOD>6.0' \
+--include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>6.0' \
 --output-type z \
 --output-file hq_bi_core_${vcf} \
 ${vcf}
@@ -262,7 +262,7 @@ bcftools index --tbi pass_biseg_cds_${vcf}
 # To create a vcf file which contains only PASS bi-allelic core SNPs with
 # VQSLOD > 0 that are segregating:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && VQSLOD>0.0 && AC>0' \
+--include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>0.0 && AC>0' \
 --output-type z \
 --output-file pass_biseg_core_${vcf} \
 ${vcf}
@@ -271,7 +271,7 @@ bcftools index --tbi pass_biseg_core_${vcf}
 # To create a vcf file which contains only PASS bi-allelic core SNPs and INDELS with
 # VQSLOD > 0:
 bcftools view \
---include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && VQSLOD>6.0 && AC>0' \
+--include 'FILTER="PASS" && N_ALT=1 && (TYPE="snp" || TYPE="indel") && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>6.0 && AC>0' \
 --output-type z \
 --output-file hq_biseg_core_${vcf} \
 ${vcf}
