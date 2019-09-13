@@ -9,6 +9,7 @@ if [[ $# == 2 ]]; then
        --vcf $vcf \
        --keep-allele-order \
        --ref-from-fa $ref \
+       --aec \
        --export vcf-4.2 bgz \
        --out ${vcf/.vcf.gz/_bipass_tref}
 

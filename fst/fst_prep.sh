@@ -10,6 +10,7 @@ if [[ $# == 3 ]]; then
     plink1.9 \
         --vcf ${in_vcf} \
         --allow-no-sex \
+	--aec \
         --indep-pairwise 50 5 0.5 \
         --out pruned
 
@@ -18,6 +19,7 @@ if [[ $# == 3 ]]; then
         --vcf ${in_vcf} \
         --allow-no-sex \
 	--maf ${maf} \
+	--aec \
         --extract pruned.prune.in \
         --make-bed \
         --out ${outname}
