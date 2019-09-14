@@ -53,6 +53,16 @@ wg.ihs<-ihh2ihs(wg.res)
 
 ihs <- na.omit(wg.ihs$ihs)
 mapF <- snpInfo
+ns <- length(wg.res$POSITION)
+print("", quote=F)
+print("Effive number of SNPs (Total Number of SNPs that passed filters)", quote=F)
+print(ns, quote=F)
+print("", quote=F)
+thresh <- as.numeric(-log10(0.05/ns))
+print("", quote=F)
+print("Bonferoni Corrected threshold", quote=F)
+print(thresh, quote=F)
+print("", quote=F)
 map <- data.frame(ID=mapF$V1, POSITION=mapF$V3, Anc=mapF$V4, Der=mapF$V5)
 ihsMerge <- merge(map, ihs, by = "POSITION")
 signals <- ihsMerge[ihsMerge[,7]>=thresh,]
@@ -68,11 +78,18 @@ write.table(ihs, file = iHSresult, col.names=T, row.names=F, quote=F, sep="\t")
 write.table(wg.ihs$frequency.class, file = iHSfrq, col.names=T, row.names=F, quote=F, sep="\t")
 write.table(signals, file = sigOut, col.names=T, row.names=F, quote=F, sep="\t")
 
+#----Add Multiple test corrections
+lopP <- read.table(iHSresult, header=T)
+lopP$P <- as.numeric(10^-(lopP$LOGPVALUE))
+lopP$BH_adj_P <- p.adjust(lopP$P, method="BH")
+lopP$Bonf <- p.adjust(lopP$P, method="bonferroni")
+write.table(lopP, file = iHSresult, col.names=T, row.names=F, quote=F, sep='\t')
+
 # Manhattan PLot of iHS results
 png(iHSplot, height = 700, width = 640, res = NA, units = "px")
 layout(matrix(1:2,2,1))
-manhattanplot(wg.ihs, pval = F, main = iHSmain, threshold = c(-2, 2))
-manhattanplot(wg.ihs, pval = T, main = iHSmain, threshold = c(-2, 2))
+manhattanplot(wg.ihs, pval = F, main = iHSmain, threshold = c(-3, 3))
+manhattanplot(wg.ihs, pval = T, main = iHSmain, threshold = c(-thresh, thresh))
 dev.off()
 
 # Gaussian Distribution and Q-Q plots
