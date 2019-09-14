@@ -9,6 +9,7 @@ if [[ $# == 3 ]]; then
     plink \
 	--bfile ${in_file} \
 	--fst \
+	--aec \
 	--within ${samf} \
 	--out ${outname}
 

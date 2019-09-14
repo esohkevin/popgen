@@ -21,15 +21,15 @@ png(filename = "mishet.png", width = 500, height = 480, units = "px", pointsize 
     bg = "white",  res = NA)
 par(mfrow=c(1,1))
 plot(mishet$het.rate, mishet$mis.rate, xlab = "Heterozygous rate", ylab = "Proportion of missing genotype", main="Sample Missingness", pch=20)
-abline(v=0.05, h=0.1, lty=2)
+abline(v=1, h=0.1, lty=2)
 dev.off()
 
 # Extract individuals that will be excluded from further analysis (who didn't pass the filter)
 # Individuals with mis.rate > 0.1 (10% missingness)
-fail_mis_qc=mishet[mishet$mis.rate > 0.1, ]
+fail_mis_qc=mishet[mishet$mis.rate > 0.10, ]
 write.table(fail_mis_qc[,1:2], file = "fail-mis.qc", row.names = F, col.names = F, quote = F, sep = "\t")
 
 # Individuals with outlying het
-fail_het_qc=mishet[mishet$het.rate > 0.05, ]
+fail_het_qc=mishet[mishet$het.rate > 1, ]
 write.table(fail_het_qc[,1:2], file = "fail-het.qc", row.names = F, col.names = F, quote = F, sep = "\t")
 

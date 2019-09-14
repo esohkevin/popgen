@@ -1,0 +1,48 @@
+#!/usr/bin/Rscript
+
+setwd("~/Git/popgen/fws/")
+
+library(SeqArray)
+library(colorspace)
+#----Convert VCF tp GDS
+seqVCF2GDS("moi.vcf.gz", "moi.gds")
+
+#----Open GDS file
+isolates <- seqOpen("moi.gds")
+
+#----Get summary of file
+seqSummary(isolates)  
+
+#----Save sample iDs
+sample.id <- seqGetData(isolates, "sample.id")
+
+library(moimix)
+
+#----Get coordinates
+coords <- getCoordinates(isolates)
+head(coords)
+
+isolate_baf <- bafMatrix(isolates)
+class(isolate_baf)
+
+str(isolate_baf)
+
+png("QP0098-C.png", height = 15, width = 18, res = 100, units = "cm", points = 14)
+plot(isolate_baf, "QP0098-C")
+dev.off()
+
+set.seed(2002)
+counts <- alleleCounts(isolates)
+m1 <- binommix(counts, sample.id = "QP0098-C", k = 2)
+summary(m1)
+
+fws_all <- getFws(isolates)
+
+png("fwsHist.png", height = 16, width = 16, res = 100, units = "cm", points = 14)
+hist(fws_all)
+dev.off()
+
+fws_all["QP0098-C"] < 0.95
+#fws_all[1:row(fws_all)] < 0.95
+
+#fws_all

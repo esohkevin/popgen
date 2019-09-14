@@ -12,6 +12,7 @@ if [[ $# == 2 ]]; then
     	--file $ped \
     	--extract $fst \
     	--recode \
+	--aec \
     	--out $out
     
     ./make_par_files.sh ${out}
