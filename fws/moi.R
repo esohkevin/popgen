@@ -27,7 +27,9 @@ class(isolate_baf)
 
 str(isolate_baf)
 
-plot(isolate_baf, "QP0092-C")
+png("QP0098-C.png", height = 15, width = 18, res = 100, units = "cm", points = 14)
+plot(isolate_baf, "QP0098-C")
+dev.off()
 
 set.seed(2002)
 counts <- alleleCounts(isolates)
@@ -36,9 +38,11 @@ summary(m1)
 
 fws_all <- getFws(isolates)
 
-hist(fws_all, col = c)
+png("fwsHist.png", height = 16, width = 16, res = 100, units = "cm", points = 14)
+hist(fws_all)
+dev.off()
 
 fws_all["QP0098-C"] < 0.95
-fws_all[1:row(fws_all)] < 0.95
+#fws_all[1:row(fws_all)] < 0.95
 
-fws_all
+#fws_all
