@@ -2,11 +2,15 @@
 
 if [[ $# == 2 ]]; then
 
-   java -jar beagle.12Jul19.0df.jar \
+    beagle \
 	gt=${1} \
 	out=${2} \
 	burnin=10 \
-	iterations=15
+	iterations=15 \
+	nthreads=4
+
+    bgzip ${2}
+    tabix -f -p vcf ${2}.vcf.gz
 
 else
    echo """

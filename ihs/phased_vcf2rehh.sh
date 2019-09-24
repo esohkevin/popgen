@@ -32,6 +32,7 @@ if [[ $data == "sub" ]]; then
                        	--chr $3 \
                        	--export hapslegend \
                        	--vcf $8 \
+			--aec \
                        	--out ${6/.*}${7}_chr${3} \
                        	--from-kb $4 \
                        	--to-kb $5 \
@@ -60,6 +61,7 @@ if [[ $data == "sub" ]]; then
                          --chr $3 \
                          --export hapslegend \
                          --vcf $5 \
+			 --aec \
                          --out ${4/.*}_chr$3 \
                          --keep ${4} \
                          --double-id
@@ -88,6 +90,7 @@ if [[ $data == "sub" ]]; then
                                   --export hapslegend \
                                   --vcf $6 \
                                   --chr $chr \
+				  --aec \
                                   --keep ${5} \
                                   --out $3_chr${chr} \
                                   --double-id
@@ -148,6 +151,7 @@ elif [[ $data == "all" ]]; then
                               --chr $3 \
                               --export hapslegend \
                               --vcf $8 \
+			      --aec \
                               --out ${6}${7}_chr${3} \
                               --from-kb $4 \
                               --to-kb $5 \
@@ -175,6 +179,7 @@ elif [[ $data == "all" ]]; then
                           --chr $4 \
                           --export hapslegend \
                           --vcf $5 \
+			  --aec \
                           --out $3_chr$4 \
                           --double-id
                
@@ -201,6 +206,7 @@ elif [[ $data == "all" ]]; then
                          plink2 \
                            --export hapslegend \
                            --vcf $5 \
+			   --aec \
                	           --chr $chr \
                            --out $3_chr${chr} \
                            --double-id

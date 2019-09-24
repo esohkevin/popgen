@@ -6,14 +6,14 @@ for file in $@; do
        rm ${file/.vcf.gz/temp.vcf}
     fi
 
-    zgrep "^#" $file > ${file/.vcf.gz/temp.vcf}
+    bcftools view -h $file > ${file/.vcf.gz/temp.vcf}
+
+
     zgrep -v "^#" $file | \
 	awk '{print $1"\t"$2"\t"$1":"$2}' > temp_1-3.vcf
     zgrep -v "^#" $file | \
 	cut -f 4- > temp_4-end.vcf
     paste temp_1-3.vcf temp_4-end.vcf >> ${file/.vcf.gz/temp.vcf}
-#    bgzip -f ${file/.vcf.gz/temp.vcf}
-
 
     cat ${file/.vcf.gz/temp.vcf} | \
                 sed 's/Pf3D7_01_v3/1/g' | \
@@ -32,7 +32,7 @@ for file in $@; do
                 sed 's/Pf3D7_14_v3/14/g'  > ${file/.vcf.gz/_updated.vcf}
 
     bgzip -f ${file/.vcf.gz/_updated.vcf}
-
+    bcftools index -f --tbi ${file/.vcf.gz/_updated.vcf.gz}
 
     rm *temp*
 done

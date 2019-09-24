@@ -28,7 +28,11 @@ if [[ $param == [12] ]]; then
 
    elif [[ $param == "2" && $# == 4 ]]; then
 
-        Rscript scanFull.R $2 $3 $4
+        Rscript scanFull.R $2 $3 $4 
+	
+	#---- Get signals using BH corected column
+	head -1 ${3}iHSresult.txt > ${3}Signals.txt
+	awk '$6<=0.05' ${3}iHSresult.txt >> ${3}Signals.txt
   
    fi
 
