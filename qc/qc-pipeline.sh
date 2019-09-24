@@ -90,10 +90,12 @@ if [[ $# == 4 ]]; then
     	--make-bed \
     	--out temp3
 
-    plink1.9 \
+    plink2 \
 	--bfile temp3 \
 	--aec \
-	--recode vcf-fid bgz \
+	--real-ref-alleles \
+	--fa PlasmoDB-45_PreichenowiCDC_Genome.fasta \
+	--export vcf-4.2 id-paste=fid bgz \
 	--out ${out_vcf}
 
     rm temp*
