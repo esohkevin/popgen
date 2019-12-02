@@ -31,6 +31,7 @@ if [[ $data == "sub" ]]; then
                        plink2 \
                        	--chr $3 \
                        	--export hapslegend \
+			--keep-allele-order \
                        	--vcf $8 \
                        	--out ${6/.*}${7}_chr${3} \
                        	--from-kb $4 \
@@ -60,6 +61,7 @@ if [[ $data == "sub" ]]; then
                          --chr $3 \
                          --export hapslegend \
                          --vcf $5 \
+			 --keep-allele-order \
                          --out ${4/.*}_chr$3 \
                          --keep ${4} \
                          --double-id
@@ -87,6 +89,7 @@ if [[ $data == "sub" ]]; then
                                 plink2 \
                                   --export hapslegend \
                                   --vcf $6 \
+				  --keep-allele-order \
                                   --chr $chr \
                                   --keep ${5} \
                                   --out $3_chr${chr} \
@@ -148,6 +151,7 @@ elif [[ $data == "all" ]]; then
                               --chr $3 \
                               --export hapslegend \
                               --vcf $8 \
+			      --keep-allele-order \
                               --out ${6}${7}_chr${3} \
                               --from-kb $4 \
                               --to-kb $5 \
@@ -175,6 +179,7 @@ elif [[ $data == "all" ]]; then
                           --chr $4 \
                           --export hapslegend \
                           --vcf $5 \
+			  --keep-allele-order \
                           --out $3_chr$4 \
                           --double-id
                
@@ -202,6 +207,7 @@ elif [[ $data == "all" ]]; then
                            --export hapslegend \
                            --vcf $5 \
                	           --chr $chr \
+			   --keep-allele-order \
                            --out $3_chr${chr} \
                            --double-id
                

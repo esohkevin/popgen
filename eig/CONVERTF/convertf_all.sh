@@ -12,11 +12,11 @@ if [[ $1 == "sub" ]]; then
         # Prune the qc-dataset for SNPs within 50bp with r^2 < 0.2 using a window of 5 SNPs
         plink \
             --vcf "${vcf}" \
-            --indep-pairwise 50 10 0.2 \
+            --indep-pairwise 50 10 0.5 \
             --allow-no-sex \
             --keep ${samfile} \
             --keep-allele-order \
-            --autosome \
+	    --aec \
             --double-id \
             --biallelic-only \
             --out qc-ldPruned
@@ -25,7 +25,7 @@ if [[ $1 == "sub" ]]; then
             --vcf "${vcf}" \
             --extract qc-ldPruned.prune.in \
             --allow-no-sex \
-            --autosome \
+	    --aec \
             --keep ${samfile} \
             --keep-allele-order \
             --make-bed \
@@ -35,6 +35,7 @@ if [[ $1 == "sub" ]]; then
         plink \
             --vcf qc-camgwas-ldPruned \
             --recode \
+	    --aec \
 	    --maf $maf \
             --keep-allele-order \
             --allow-no-sex \
@@ -71,9 +72,9 @@ elif [[ $1 == "all" ]]; then
         # Prune the qc-dataset for SNPs within 50bp with r^2 < 0.2 using a window of 5 SNPs
         plink \
             --vcf "${vcf}" \
-            --indep-pairwise 50 10 0.2 \
+            --indep-pairwise 50 10 0.5 \
             --allow-no-sex \
-            --autosome \
+	    --aec \
 	    --double-id \
     	    --keep-allele-order \
 	    --biallelic-only \
@@ -83,7 +84,7 @@ elif [[ $1 == "all" ]]; then
             --vcf "${vcf}" \
             --extract qc-ldPruned.prune.in \
             --allow-no-sex \
-            --autosome \
+	    --aec \
 	    --keep-allele-order \
             --make-bed \
 	    --double-id \
@@ -92,6 +93,7 @@ elif [[ $1 == "all" ]]; then
         plink \
        	    --bfile qc-camgwas-ldPruned \
        	    --recode \
+	    --aec \
 	    --maf $maf \
        	    --keep-allele-order \
        	    --allow-no-sex \

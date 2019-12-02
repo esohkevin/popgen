@@ -26,7 +26,7 @@ dev.off()
 
 # Extract individuals that will be excluded from further analysis (who didn't pass the filter)
 # Individuals with mis.rate > 0.1 (10% missingness)
-fail_mis_qc=mishet[mishet$mis.rate > 0.1, ]
+fail_mis_qc=mishet[mishet$mis.rate > 0.10, ]
 write.table(fail_mis_qc[,1:2], file = "fail-mis.qc", row.names = F, col.names = F, quote = F, sep = "\t")
 
 # Individuals with outlying het

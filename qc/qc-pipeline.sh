@@ -19,6 +19,7 @@ if [[ $# == 4 ]]; then
     plink1.9 \
     	--vcf ${in_vcf} \
     	--missing \
+	--aec \
     	--allow-no-sex \
     	--out temp1
     
@@ -26,6 +27,7 @@ if [[ $# == 4 ]]; then
     plink1.9 \
     	--vcf ${in_vcf} \
     	--het \
+	--aec \
     	--allow-no-sex \
     	--out temp1
     
@@ -46,6 +48,7 @@ if [[ $# == 4 ]]; then
     plink1.9 \
     	--vcf ${in_vcf} \
     	--make-bed \
+	--aec \
     	--allow-no-sex \
     	--remove fail-ind.qc \
     	--out temp2
@@ -56,6 +59,7 @@ if [[ $# == 4 ]]; then
     	--bfile temp2 \
     	--allow-no-sex \
     	--missing \
+	--aec \
     	--out temp2
     
     # Compute MAF
@@ -63,6 +67,7 @@ if [[ $# == 4 ]]; then
     	--bfile temp2 \
     	--allow-no-sex \
     	--freq \
+	--aec \
     	--out temp2
     
     echo -e """\e[38;5;40m
@@ -80,13 +85,17 @@ if [[ $# == 4 ]]; then
     	--bfile temp2 \
     	--allow-no-sex \
     	--maf $maf \
+	--aec \
     	--geno ${geno} \
     	--make-bed \
     	--out temp3
 
-    plink1.9 \
+    plink2 \
 	--bfile temp3 \
-	--recode vcf-fid bgz \
+	--aec \
+	--real-ref-alleles \
+	--fa PlasmoDB-45_PreichenowiCDC_Genome.fasta \
+	--export vcf-4.2 id-paste=fid bgz \
 	--out ${out_vcf}
 
     rm temp*

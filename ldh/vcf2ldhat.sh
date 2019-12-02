@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [[ $# == 3 ]]; then
+if [[ $# == 4 ]]; then
 
     in_vcf="$1"
     chr=$2
-    famfile="$3"
+    thin="$3"
     out="$4"
 
     for chr in $(seq 1 $chr); do
@@ -13,13 +13,13 @@ if [[ $# == 3 ]]; then
 	--chr ${chr} \
 	--phased \
 	--ldhat \
-	--keep ${famfile} \
+	--max-indv $thin \
 	--out ${out}chr${chr}
     done
 
 else
     echo """
-	Usage: ./vcf2ldhat.sh <in_vcf> <chr#> <sample-file> <out-prefix>
+	Usage: ./vcf2ldhat.sh <in_vcf> <#chr> <thin-samples-to-#> <out-prefix>
     """
 
 fi

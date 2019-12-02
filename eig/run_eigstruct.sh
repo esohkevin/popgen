@@ -2,7 +2,12 @@
 ####################################### EIGEN ANALYSIS #######################################
 # Convert File Formats
 cd CONVERTF/
-./convertf_all.sh all ../../qc/bipcore-qc-phased.vcf.gz 0.3 passbicore
+./convertf_all.sh all ../../qc/bipcore.vcf.gz 0.2 passbicore
+
+cd ../../fst/
+./run_all.sh
+
+cd -
 
 #----Pull Fst-best SNPs
 for i in age alt dsex para stat; do 
