@@ -30,6 +30,6 @@ fail_mis_qc=mishet[mishet$mis.rate > 0.10, ]
 write.table(fail_mis_qc[,1:2], file = "fail-mis.qc", row.names = F, col.names = F, quote = F, sep = "\t")
 
 # Individuals with outlying het
-fail_het_qc=mishet[mishet$het.rate > 0.05, ]
+fail_het_qc=mishet[mishet$het.rate > 0.5, ]
 write.table(fail_het_qc[,1:2], file = "fail-het.qc", row.names = F, col.names = F, quote = F, sep = "\t")
 

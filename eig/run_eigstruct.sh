@@ -2,7 +2,7 @@
 ####################################### EIGEN ANALYSIS #######################################
 # Convert File Formats
 cd CONVERTF/
-./convertf_all.sh all ../../qc/bipcore.vcf.gz 0.2 passbicore
+./convertf_all.sh all ../../qc/bipco-phased.vcf.gz 0.2 passbicore
 
 cd ../../fst/
 ./run_all.sh

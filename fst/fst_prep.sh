@@ -11,7 +11,7 @@ if [[ $# == 3 ]]; then
         --vcf ${in_vcf} \
         --allow-no-sex \
 	--aec \
-        --indep-pairwise 50 5 0.5 \
+        --indep-pairwise 50 5 0.1 \
         --out pruned
 
     #-------- Now extract the pruned SNPs to perform check-sex on
@@ -23,6 +23,14 @@ if [[ $# == 3 ]]; then
         --extract pruned.prune.in \
         --make-bed \
         --out ${outname}
+
+    #-------- Get 
+    #plink \
+	#--bfile fst-ready
+	#--out fst-ready
+	#--recode 12
+
+
     
     #-------- Pull sample IDs based on column number
     awk '{print $1, $1, $17}' ../eig/EIGENSTRAT/merged.pca.evec | sed '1d' | grep -v NA > stat.txt
@@ -31,7 +39,15 @@ if [[ $# == 3 ]]; then
     awk '{print $1, $1, $20}' ../eig/EIGENSTRAT/merged.pca.evec | sed '1d' | grep -v NA > age.txt
     awk '{print $1, $1, $21}' ../eig/EIGENSTRAT/merged.pca.evec | sed '1d' | grep -v NA > para.txt
 
-    rm pruned* *.nosex
+    awk '{print $2}' ${outname}.bim > temp.txt
+    tr "\n" "," < temp.txt | sed 's/,$//' > snps.txt
+    snps=$(cat snps.txt)
+    echo "bcftools view -t ${snps} -Oz -o hier.vcf.gz ${in_vcf}" > get_hier.sh
+    chmod 755 get_hier.sh
+
+    ./get_hier.sh
+
+    rm pruned* *.nosex temp*
 
 else
     echo """
