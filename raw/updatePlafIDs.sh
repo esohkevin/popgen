@@ -10,11 +10,11 @@ for file in $@; do
 
 
     zgrep -v "^#" $file | \
-	awk '{print $1"\t"$2"\t"$1":"$2}' > temp_1-3.vcf
+	awk '{print $1"\t"$2"\t""NGS_SNP.Pf3D7_"$1"_v3."$2}' > temp_1-3.vcf
     zgrep -v "^#" $file | \
 	cut -f 4- > temp_4-end.vcf
     paste temp_1-3.vcf temp_4-end.vcf >> ${file/.vcf.gz/temp.vcf}
-
+                                         
     cat ${file/.vcf.gz/temp.vcf} | \
                 sed 's/Pf3D7_01_v3/1/g' | \
                 sed 's/Pf3D7_02_v3/2/g' | \
