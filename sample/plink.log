@@ -1,0 +1,12 @@
+PLINK v1.90b6.7 64-bit (2 Dec 2018)
+Options in effect:
+  --ld
+
+Hostname: esohkev
+Working directory: /home/esoh/Git/popgen/sample
+Start time: Fri Dec 20 02:40:14 2019
+
+Error: --ld requires at least 2 parameters.
+For more information, try 'plink --help [flag name]' or 'plink --help | more'.
+
+End time: Fri Dec 20 02:40:14 2019
