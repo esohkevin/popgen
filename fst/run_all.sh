@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #----Prepare Fst input files
-./fst_prep.sh ../qc/bipcore.vcf.gz 0.3 fst-ready
+./fst_prep.sh ../qc/bipco-phased.vcf.gz 0.3 fst-ready
 
 
 #----Run Fst with each partition
