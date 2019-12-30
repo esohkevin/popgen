@@ -1,6 +1,5 @@
-#!/usr/bin/Rscript
+#!/usr/bin/env Rscript
 
-require(rehh)
 #vignette(rehh)
 
 ## iHS and cross-Population or whole genome scans
@@ -10,10 +9,18 @@ args <- commandArgs(TRUE)
 #--------------------------------------------------------------------------------
 ##		Initialize parameter and output file names			
 ##										
+if (length(args) < 6) {
+   print("", quote=F)
+   print("Usage: scanFull.R [hapmap prefix] [outname] [#chr] [thresh] [threads] [MAF-threshold]", quote=F)
+   print("",quote=F)
+   quit(save="no")
+} else {
 
-numchr <- args[3]
-thresh <- args[4]
-threds <- args[5]
+require(rehh)
+numchr <- as.numeric(args[3])
+thresh <- as.numeric(args[4])
+threds <- as.numeric(args[5])
+mf <- as.numeric(args[6])
 snpInfo <- read.table("snp.info", header = F, as.is = T)
 iHSplot <- paste(args[2],"iHS.png", sep="")
 iHSresult <- paste(args[2],"iHSresult.txt", sep="")
@@ -32,7 +39,7 @@ for(i in 1:numchr) {
   hapFile <- paste(args[1],i,".hap",sep="")
   mapFile <- mapFile <- paste(args[1],i,".map",sep="")
   data <- data2haplohh(hap_file=hapFile, map_file=mapFile, recode.allele = F,
-		       min_perc_geno.hap=100, min_maf=0.05, 
+		       min_perc_geno.hap=100, min_maf=mf, 
 		       haplotype.in.columns=TRUE, chr.name=i)
   res <- scan_hh(data, threads = 10)
   if(i==1){wg.res<-res}else{wg.res<-rbind(wg.res,res)}
@@ -63,9 +70,9 @@ print(ns, quote=F)
 print("", quote=F)
 thr <- as.numeric(-log10(0.05/ns))
 
-if (thr >= 8) {
-	thresh <- 8
-} else {thresh <- thr}
+# if (thr >= 8) {
+# 	thresh <- 8
+# } else {thresh <- thr}
 
 print("", quote=F)
 print("Bonferoni Corrected threshold", quote=F)
@@ -96,7 +103,7 @@ write.table(lopP, file = iHSresult, col.names=T, row.names=F, quote=F, sep='\t')
 # Manhattan PLot of iHS results
 png(iHSplot, height = 700, width = 640, res = NA, units = "px")
 layout(matrix(1:2,2,1))
-manhattanplot(wg.ihs, pval = F, main = iHSmain, threshold = c(-4, 4))
+manhattanplot(wg.ihs, pval = F, main = iHSmain, threshold = c(-thresh, thresh))
 manhattanplot(wg.ihs, pval = T, main = iHSmain, threshold = c(-thresh, thresh))
 dev.off()
 
@@ -110,3 +117,4 @@ dev.off()
 
 # Frequency bin plot
 freqbinplot(wg.ihs)
+}
