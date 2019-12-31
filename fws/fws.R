@@ -1,6 +1,7 @@
 #!/usr/bin/Rscript
 
-setwd("~/Git/popgen/fws/")
+wd <- getwd()
+setwd(wd)
 fn <- "all.vcf"
 
 ## LOAD REGEX LIBRARY
@@ -9,14 +10,14 @@ library(data.table)
 
 fm <- fread(fn, header = T, nThread = 6)
 
-args <- commandArgs(TRUE)
+#args <- commandArgs(TRUE)
 
-fn <- args[1]
+#fn <- args[1]
 
 ## READ IN THE Pf AND Pv MULTIVCFs
-pvAllVCF <- read.table(fn, comment.char="#", header=TRUE)
+#pvAllVCF <- read.table(fn, comment.char="#", header=TRUE)
 pvAllVCF <- as.data.frame(fm)
-head(pvAllVCF)
+#head(pvAllVCF)
 #pvExVCF <- read.table("exons.vcf", comment.char="#", header=TRUE)
 #pvNexVCF <- read.table("nonexons.vcf", comment.char="#", header=TRUE)
 ## DEFINE A FUNCTION THAT WILL CALCULATE Fws FOR EACH DATASET
@@ -50,11 +51,11 @@ fwsCalc <- function(dataset) {
   ## CALCULATE qw, pw, and Hw, THE PROPORTIONS OF EACH ALLELE IN EACH INDIVIDUAL
   totCT <- refCT + altCT
       # Make a matrix of total counts
-  pw <- matrix(totCT, nrow = length(data[,1]), ncol = length(names(data)))
+  pw <- matrix(, nrow = length(data[,1]), ncol = length(names(data)))
       # Set up pw matrix
-  qw <- matrix(totCT, nrow = length(data[,1]), ncol = length(names(data)))
+  qw <- matrix(, nrow = length(data[,1]), ncol = length(names(data)))
       # Set up qw matrix
-  Hw <- matrix(totCT, nrow = length(data[,1]), ncol = length(names(data)))
+  Hw <- matrix(, nrow = length(data[,1]), ncol = length(names(data)))
       # Set up Hw matrix
 
   for (i in 1:length(names(data))) {
@@ -76,7 +77,7 @@ fwsCalc <- function(dataset) {
 }
 ## FINALLY, PLOT THE GRAPHS
 pv_all_fws <- fwsCalc(pvAllVCF)
-pv_all_fws
+#pv_all_fws
 #pv_ex_fws <- fwsCalc(pvExVCF)
 #pv_nex_fws <- fwsCalc(pvNexVCF)
 png("fws.png", height = 16, width = 16, units = "cm", res = 100, points = 14)
