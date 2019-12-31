@@ -88,12 +88,23 @@ ld1 <- read.table("pointestimates/ld/chr1.ld.1-100000.hap.ld", header = TRUE)
 ld2 <- read.table("pointestimates/ld/chr2.ld.1-100000.hap.ld", header = TRUE)
 ld3 <- read.table("pointestimates/ld/chr3.ld.1-100000.hap.ld", header = TRUE)
 ld4 <- read.table("pointestimates/ld/chr4.ld.1-100000.hap.ld", header = TRUE)
+ld5 <- read.table("pointestimates/ld/chr5.ld.1-100000.hap.ld", header = TRUE)
+ld6 <- read.table("pointestimates/ld/chr6.ld.1-100000.hap.ld", header = TRUE)
+ld7 <- read.table("pointestimates/ld/chr7.ld.1-100000.hap.ld", header = TRUE)
+ld8 <- read.table("pointestimates/ld/chr8.ld.1-100000.hap.ld", header = TRUE)
+ld9 <- read.table("pointestimates/ld/chr9.ld.1-100000.hap.ld", header = TRUE)
+ld10 <- read.table("pointestimates/ld/chr10.ld.1-100000.hap.ld", header = TRUE)
+ld11 <- read.table("pointestimates/ld/chr11.ld.1-100000.hap.ld", header = TRUE)
+ld12 <- read.table("pointestimates/ld/chr12.ld.1-100000.hap.ld", header = TRUE)
+ld13 <- read.table("pointestimates/ld/chr13.ld.1-100000.hap.ld", header = TRUE)
+ld14 <- read.table("pointestimates/ld/chr14.ld.1-100000.hap.ld", header = TRUE)
 
-ldpv <- read.table("pointestimates/ld/chr5.ld.1-100000.hap.ld", header = TRUE)
+ldpv <- read.table("pointestimates/ld/chr1.ld.1-100000.hap.ld", header = TRUE)
 
 # optional to convert NaN to 1
 ld1$R.2[is.nan(ld1$R.2)] <- 1
 ld2$R.2[is.nan(ld2$R.2)] <- 1
+ld3$R.2[is.nan(ld3$R.2)] <- 1
 ld4$R.2[is.nan(ld4$R.2)] <- 1
 
 
@@ -122,7 +133,7 @@ plot.boot(slimboot, 200, 1000, "lightgray") # plot shaded outline of max and min
 ## Plot pointestimates
 plot.bin(ld1, 200, 1000, "cadetblue1")
 plot.bin(ld2, 200, 1000, "firebrick3")
-#plot.bin(ld3, 200, 1000, "red")
+plot.bin(ld3, 200, 1000, "red")
 plot.bin(ld4, 200, 1000, "goldenrod2")
 
 legend(80000, 0.55, 
