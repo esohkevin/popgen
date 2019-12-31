@@ -1,4 +1,5 @@
 #!/bin/bash
 
 mkdir -p output &&
-ldhelmet find_confs --num_threads 24 -w 50 -o output/chr22.conf chr22.ldhelmet.snps
+seq 1 14 | parallel echo 'find_confs --num_threads 10 -w 50 -o output/chr{}.conf ${base}{}.ldhelmet.snps' | xagrs -P2 -n8 ldhelmet
+
