@@ -89,7 +89,7 @@ ld2 <- read.table("pointestimates/ld/chr2.ld.1-100000.hap.ld", header = TRUE)
 ld3 <- read.table("pointestimates/ld/chr3.ld.1-100000.hap.ld", header = TRUE)
 ld4 <- read.table("pointestimates/ld/chr4.ld.1-100000.hap.ld", header = TRUE)
 
-ldpv <- read.table("pv-10000.hap.ld", header = TRUE)
+ldpv <- read.table("pointestimates/ld/chr5.ld.1-100000.hap.ld", header = TRUE)
 
 # optional to convert NaN to 1
 ld1$R.2[is.nan(ld1$R.2)] <- 1
