@@ -27,14 +27,15 @@ else
    do
    
    ## split vcf
-   vcftools --gzvcf $vcf2use \
-   	--recode \
-   	--maf 0.05 \
-   	--out chr$i
+   #vcftools --gzvcf $vcf2use \
+   #	--recode \
+   #	--maf 0.05 \
+   #	--out chr$i
    
    ## calculate LD
-   vcftools --gzvcf chr$i.recode.vcf \
+   vcftools --gzvcf $vcf2use \
    	--hap-r2 \
+	--chr $i \
    	--ld-window-bp 100000 \
    	--out chr$i.ld.1-100000
    
@@ -47,6 +48,9 @@ else
    
    for strap in {1..100} # number of bootstraps to do
    do
+	if [[ -f "bootstrap/boot/boot$strap.txt" ]]; then
+		rm bootstrap/boot/boot$strap.txt
+	fi
    
    	## sample without replacement
    	## sampling with replacement is impossible with vcftools
