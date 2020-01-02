@@ -1,6 +1,5 @@
-#!/usr/bin/Rscritp
+#!/usr/bin/env Rscript
 
-#setwd("~/esohdata/GWAS/phase/")
 setwd("~/Git/popgen/fst/")
 
 #------- Load packages
@@ -12,7 +11,7 @@ require(pegas)
 
 #------- Read in files
 #ped <- "fst-ready.ped"
-pheno <- "pheno.txt"
+pheno <- "pca-pheno.txt"
 fpheno <- as.data.frame(fread(pheno, nThread = 4))
 #fped <- as.data.frame(fread(ped, nThread = 4))
 
@@ -117,7 +116,7 @@ stat_g$p.val
 
 
 #-------- Plot NJ tree
-png("bionj.png", height = 15, width = 15, units = "cm", res = 100, points = 12)
+png("bionj.png", height = 560, width = 700, units = "px", res = NA, points = 12)
 par(mfrow = c(2,2), mar = c(3,0,3,0))
 for (i in c("alt_dat","para_dat","age_dat")) {
   if (i == "alt_dat") {
@@ -170,7 +169,7 @@ for (i in c("alt_dat","para_dat","age_dat")) {
 dev.off()
   
 
-png("boxplots.png", height = 13, width = 18, units = "cm", res = 100, points = 14)
+png("boxplots.png", height = 500, width = 700, units = "px", res = NA, points = 13)
 par(mfrow = c(2,3))
 boxplot(age_bstat$perloc[,c(1:3)], main = "Donor Age")
 mtext(paste0("p-value ",age_g$p.val), side = 3)

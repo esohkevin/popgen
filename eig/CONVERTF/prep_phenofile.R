@@ -1,6 +1,6 @@
-#!/usr/bin/Rscript
+#!/usr/bin/env Rscript
 
-pheno_file <- read.table("../../plaf_pheno.txt", header=T, as.is=T, fill = T)
+pheno_file <- read.table("../../raw/plaf_pheno.txt", header=T, as.is=T, fill = T)
 colnames(pheno_file) <- c("Sample","SC","REG","TWN","DNACD","DNAEX",
 			  "PARA","DAGE","DSEX","GPS","Status","ALT","ALTCAT")
 

@@ -39,14 +39,14 @@ if [[ $# == 3 ]]; then
     awk '{print $1, $1, $20}' ../eig/EIGENSTRAT/merged.pca.evec | sed '1d' | grep -v NA > age.txt
     awk '{print $1, $1, $21}' ../eig/EIGENSTRAT/merged.pca.evec | sed '1d' | grep -v NA > para.txt
 
-    awk '{print $2}' ${outname}.bim > temp.txt
+    awk '{print $1":"$4}' ${outname}.bim > temp.txt
     tr "\n" "," < temp.txt | sed 's/,$//' > snps.txt
     snps=$(cat snps.txt)
-    echo "bcftools view -t ${snps} -Oz -o hier.vcf.gz ${in_vcf}" > get_hier.sh
+    echo "bcftools view -t ${snps} -Oz -o temp.vcf.gz ${in_vcf}" > get_hier.sh
     chmod 755 get_hier.sh
 
     ./get_hier.sh
-
+    zcat temp.vcf.gz | sed 's/SNP.Pf3D7/SNP_Pf3D7/g' | sed 's/v3./v3_/g' > hier.vcf.gz
     rm pruned* *.nosex temp*
 
 else

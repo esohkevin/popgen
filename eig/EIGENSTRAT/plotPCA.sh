@@ -9,7 +9,7 @@ if [[ $# == 1 ]]; then
    Rscript eig.R $1
 
    awk '{print $1,$1}' merged.pca.evec | sed '1d' > ../../qc/pca.ids
-
+   cut -f1,13- merged.pca.evec > ../../fst/pca-pheno.txt
 #   mv *.png ../../../images/
 
 #   cut -f4 -d' ' ${1} | sed '1d' > eig.id1
