@@ -31,9 +31,9 @@ else
    bcftools index --tbi pass_cds_${vcf}
    
    # To create a vcf file which contains only PASS bi-allelic core SNPs with
-   # VQSLOD > 0 that are segregating:
+   # VQSLOD > 0:
    bcftools view \
-   --include 'FILTER="PASS" && N_ALT=1 && AC>0 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>0.0' \
+   --include 'FILTER="PASS" && N_ALT=1 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>0.0' \
    --threads 10 \
    --output-type z \
    --output-file pass_core_${vcf} \
@@ -46,7 +46,7 @@ else
    --include 'FILTER="PASS" && N_ALT=1 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>6.0' \
    --threads 10 \
    --output-type z \
-   --output-file hq_bi_core_${vcf} \
+   --output-file hq_core_${vcf} \
    ${vcf}
    bcftools index --tbi hq_core_${vcf}
    
