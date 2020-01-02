@@ -65,18 +65,16 @@ ihs <- na.omit(wg.ihs$ihs)
 mapF <- snpInfo
 ns <- length(wg.res$POSITION)
 print("", quote=F)
-print("Effive number of SNPs (Total Number of SNPs that passed rehh filters)", quote=F)
-print(ns, quote=F)
+print(paste0("Effive number of SNPs (Total Number of SNPs that passed rehh filters): ", ns), quote=F)
 print("", quote=F)
 thr <- as.numeric(-log10(0.05/ns))
 
-# if (thr >= 8) {
-# 	thresh <- 8
-# } else {thresh <- thr}
+if (thr >= 8) {
+	thresh <- 8
+} else {thresh <- thr}
 
 print("", quote=F)
-print("Bonferoni Corrected threshold", quote=F)
-print(thresh, quote=F)
+print(paste0("Bonferoni Corrected threshold: ", thresh), quote=F)
 print("", quote=F)
 map <- data.frame(ID=mapF$V1, POSITION=mapF$V3, Anc=mapF$V4, Der=mapF$V5)
 ihsMerge <- merge(map, ihs, by = "POSITION")

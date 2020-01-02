@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [[ $# == 0 ]]; then
-   echo "Usage: ./updatePlafIds.sh [vcf-file(s)]"
+   echo "Usage: ./getSnps.sh [vcf-file(s)]"
 else
    for file in $@; do
    f=$(basename $file)

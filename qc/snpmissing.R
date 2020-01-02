@@ -1,8 +1,11 @@
 #!/usr/bin/Rscript
 
 ######################################### SNP QC ############################################
+args <- commandArgs(TRUE)
+misout <- paste0(args[1],"_snp_qc_missing.png")
+mafout <- paste0(args[1],"_snp_qc_maf.png")
 lmiss=read.table("temp2.lmiss", header = T, as.is = T)
-png(filename = "snp_qc_missing.png", width = 500, height = 500, units = "px", pointsize = 16,
+png(filename = misout, width = 500, height = 500, units = "px", pointsize = 16,
     bg = "white",  res = NA)
 par(mfrow=c(1,1))
 hist(log10(lmiss$F_MISS), ylab = "Number of SNPs", xlab = "log10(lmiss$F_MISS)", main="")
@@ -11,7 +14,7 @@ dev.off()
 
 # Examining minor allele frequency
 freq=read.table("temp2.frq", header = T, as.is = T)
-png(filename = "snp_qc_maf.png", width = 500, height = 500, units = "px", pointsize = 16,
+png(filename = mafout, width = 500, height = 500, units = "px", pointsize = 16,
     bg = "white",  res = NA)
 par(mfrow=c(1,1))
 hist(freq$MAF, ylab = "Number of SNPs", xlab = "MAF", main="")

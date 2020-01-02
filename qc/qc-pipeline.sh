@@ -5,15 +5,16 @@
 ### Tobias Apinjoh & Kevin Esoh (2019)
 ###
 
-if [[ $# == 4 ]]; then
+if [[ $# == 5 ]]; then
 
     #-------Set variables
     in_vcf="$1"
     bname="$(basename $in_vcf)"
     out_vcf="${bname/.vcf.gz/_qc}"
-    ld="$2"
-    maf="$3"
-    geno="$4"
+    Lhet="$2"
+    Uhet=$3
+    maf="$4"
+    geno="$5"
     
     #-------- Compute missing data stats
     plink1.9 \
@@ -39,10 +40,10 @@ if [[ $# == 4 ]]; then
     	"""
     echo -e "\n\e[38;5;40mNow generating plots for per individual missingness in R. Please wait...\e[0m\n"
     
-    R CMD BATCH indmissing.R
+    Rscript indmissing.R $Lhet $Uhet ${bname/.vcf*/}
     
     #------- Merge IDs of all individuals that failed per individual qc
-    cat fail-het.qc fail-mis.qc | sort | uniq > fail-ind.qc
+    cat ${bname/.vcf*/}_fail-het.qc ${bname/.vcf*/}_fail-mis.qc | sort | uniq > ${bname/.vcf*/}_fail-ind.qc
     
     #-------- Remove individuals who failed per individual QC
     plink1.9 \
@@ -50,7 +51,7 @@ if [[ $# == 4 ]]; then
     	--make-bed \
 	--aec \
     	--allow-no-sex \
-    	--remove fail-ind.qc \
+    	--remove ${bname/.vcf*/}_fail-ind.qc \
     	--out temp2
     
     #-------- Per SNP QC
@@ -78,7 +79,7 @@ if [[ $# == 4 ]]; then
     	"""
     echo -e "\n\e[38;5;40mNow generating plots for per SNP QC in R. Please wait...\e[0m\n"
     
-    R CMD BATCH snpmissing.R
+    Rscript snpmissing.R ${bname/.vcf*/}
     
     #-------- Remove SNPs that failed per marker QC
     plink1.9 \
@@ -101,6 +102,12 @@ if [[ $# == 4 ]]; then
     rm temp*
 else
     echo """
-	Usage:./qc-pipeline.sh <in-vcf> <ld-thresh> <maf-thresh> <geno-thresh>
+	Usage:./qc-pipeline.sh <in-vcf> <Lhet> <Uhet> <maf-thresh> <geno-thresh>
+	Lhet: Lower heterozygosity threshold below which samples are removed for outlying het
+	Uhet: Upper heterozygosity threshold
+
+	NB: Lhet and Uhet should be informed by running the qc-pipeline with and an initial
+	    Lhet = 0 and Uhet = 1, then observe the resulting *_mishet.png file to set the 
+	    right Lhet/Uhet thresholds
     """
 fi
