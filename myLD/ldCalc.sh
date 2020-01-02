@@ -57,17 +57,19 @@ else
    	## pull 17 isolates
    	shuf -n17 $s >> bootstrap/boot/boot$strap.txt
    
-   	## subsample the VCF
+   	## subsample the VCF (--recode \)
    	vcftools --gzvcf $vcf2use \
    		--keep bootstrap/boot/boot$strap.txt \
-   		--recode \
-   		--out bootstrap/vcfs/boot$strap
+   		--ld-window-bp 100000 \
+		--hap-r2 \
+		--out bootstrap/ld/boot$strap.ld.1-100000
+   		#--out bootstrap/vcfs/boot$strap
    
    	## calculate LD stats
-   	vcftools --gzvcf bootstrap/vcfs/boot$strap.recode.vcf \
-   		--hap-r2 \
-   		--ld-window-bp 100000 \
-   		--out bootstrap/ld/boot$strap.ld.1-100000
+   	#vcftools --gzvcf bootstrap/vcfs/boot$strap.recode.vcf \
+   	#	--hap-r2 \
+   	#	--ld-window-bp 100000 \
+   	#	--out bootstrap/ld/boot$strap.ld.1-100000
    
    echo $strap
    done
