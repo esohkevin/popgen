@@ -1,0 +1,5 @@
+nonmisALTCAT ../POPGEN/ALTCAT_fstsnps.txt altbest
+nonmisDSEX ../POPGEN/DSEX_fstsnps.txt dsexbest
+nonmisStatus ../POPGEN/Status_fstsnps.txt statbest
+nonmisPARACAT ../POPGEN/PARACAT_fstsnps.txt parabest
+nonmisDAGECAT ../POPGEN/DAGECAT_fstsnps.txt agebest
