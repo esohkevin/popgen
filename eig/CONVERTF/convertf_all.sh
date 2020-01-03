@@ -30,10 +30,10 @@ if [[ $1 == "sub" ]]; then
             --keep-allele-order \
             --make-bed \
             --double-id \
-            --out qc-camgwas-ldPruned
+            --out qc-ldPruned
         
         plink \
-            --vcf qc-camgwas-ldPruned \
+            --bfile qc-ldPruned \
             --recode \
 	    --aec \
 	    --maf $maf \
@@ -42,7 +42,7 @@ if [[ $1 == "sub" ]]; then
             --double-id \
             --out ${outname}
         
-        rm qc-ldPruned* qc-camgwas-ldPruned*
+        rm qc-ldPruned*
         
         # Convert files into eigensoft compartible formats
         
