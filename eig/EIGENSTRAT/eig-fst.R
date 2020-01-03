@@ -1,6 +1,5 @@
 #!/usr/bin/Rscript
 
-#setwd("~/Git/popgen/eig/EIGENSTRAT/")
 #fn <- "passbicore.pca.evec"
 
 #------ Load evec files
@@ -9,7 +8,6 @@ evec_plot <- function(evec_root = c("agebest","altbest","statbest","parabest","d
                       out_name = "pca") {
   
   require(colorspace)
-  
   #---Load pheno file
   pheno <- read.table(pheno_file, header=T)
   
@@ -17,8 +15,7 @@ evec_plot <- function(evec_root = c("agebest","altbest","statbest","parabest","d
   fout <- paste0(out_name, ".png")
   m <- ceiling(length(evec_root)/2)
   png(fout, height = 18, width = 26, units = "cm", res = 100, points = 14)
-  par(mfrow = c(2,m))
-  
+  par(mfrow = c(2,m)) 
   #---Load each evec file
   for (eroot in evec_root) {
     fn <- read.table(paste0(eroot, ".pca.evec"))
@@ -175,7 +172,7 @@ evec_plot <- function(evec_root = c("agebest","altbest","statbest","parabest","d
     } 
   }
   dev.off()
-  print("You have chosen to save the PCA image as", quote = F)
+  print(paste0("You have chosen to save the PCA image as: ", return(fout)), quote = F)
   return(fout)
 }
 

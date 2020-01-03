@@ -10,7 +10,7 @@ args <- commandArgs(TRUE)
 fm <- args[1]
 fn <- paste(fm, ".pca.evec", sep="")
 out <- paste0(fm, ".png")
-
+out2 <- paste0(fm, ".PC1vPC3.png")
 plaf_pca <- read.table(fn, header=F, as.is=T)
 
 if (ncol(plaf_pca) == 12) {
@@ -36,7 +36,7 @@ plaf_merge$Status <- as.factor(plaf_merge$Status)
 plaf_merge$DSEX <- as.factor(plaf_merge$DSEX)
 plaf_merge$PARACAT <- as.factor(plaf_merge$PARACAT)
 
-#---Set image parameters
+#---Set image parameters (PC1VsPC2)
 png(out, height = 18, width = 26, units = "cm", res = 100, points = 14)
 par(mfrow = c(2,3))
 
@@ -159,3 +159,4 @@ legend("topright",
        horiz = F,
        cex = 0.8)
 dev.off()
+

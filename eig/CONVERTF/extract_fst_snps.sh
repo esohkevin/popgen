@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [[ $# == 2 ]]; then
+if [[ $# == 3 ]]; then
 
     #-----Extract only Fst-best SNPs for PCA analysis
     ped="$1"
     fst="$2"
     bname="$(basename $fst)"
-    out="${bname/_fst.txt/}"
+    out=$3
     
     plink \
     	--file $ped \
@@ -24,6 +24,6 @@ if [[ $# == 2 ]]; then
 
 else
     echo """
-	Usage:./extract_fst_snps.sh <ped+map-root> <snp-file>
+	Usage:./extract_fst_snps.sh <ped+map-root> <snp-file> <out-prfx>
     """
 fi
