@@ -12,7 +12,7 @@ else
     --keep pca.ids \
     --double-id \
     --aec \
-    --recode vcf-fid bgz \
-    --ref-from-fa PlasmoDB-45_PreichenowiCDC_Genome.fasta \
+    --export vcf-4.2 id-paste=fid bgz \
+    --fa PlasmoDB-45_PreichenowiCDC_Genome.fasta \
     --out ${bname/.vcf*/_pca-filtered}
 fi
