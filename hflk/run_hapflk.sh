@@ -9,7 +9,7 @@ if [[ $# != 6 ]]; then
 	NB: Please specify data path. Results will be saved in 'flkout'
    """
 else
-   source activate py2
+   conda activate py2
    mkdir -p flkout
    flk=$1; hflk=$2; lc=$3; uc=$4; oflk=$(basename $flk); ohflk=$(basename $hflk) ncpu=$5; k=$6
 
