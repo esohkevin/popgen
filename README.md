@@ -56,10 +56,10 @@ Possible Combinations
 | Level	| ALTCAT | DSEX | Status | PARACAT | DAGECAT |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
 | **ALTCAT** | - |  |  |  |  |
-| **DSEX** |  | - |  |  |  |
-| **Status** |  |  | - |  |  |
-| **PARACAT** |  |  |  | - |  |
-| **DAGECAT** |  |  |  |  | - |
+| **DSEX** | - | - |  |  |  |
+| **Status** | - | - | - |  |  |
+| **PARACAT** | - | - | - | - |  |
+| **DAGECAT** | - | - | - | - | - |
 -----------------------
 _ALTCAT=altitupe category, 
 DSEX=donor age, 
