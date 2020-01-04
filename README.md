@@ -60,6 +60,7 @@ Possible Combinations
 | **Status** |  |  |  |  |  |
 | **PARACAT** |  |  |  |  |  |
 | **DAGECAT** |  |  |  |  |  |
+-----------------------
 
 Data Stratification
 ----
