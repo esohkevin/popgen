@@ -61,11 +61,11 @@ Possible Combinations
 | **PARACAT** |  |  |  |  |  |
 | **DAGECAT** |  |  |  |  |  |
 -----------------------
-___ALTCAT=altitupe category, 
+_ALTCAT=altitupe category, 
 DSEX=donor age, 
 Status=donor malaria status, 
 PARACAT=parasite category,
-DAGECAT=donor age category___
+DAGECAT=donor age category_
 
 Data Stratification
 ----
