@@ -55,7 +55,7 @@ Possible Combinations
 
 | Level	| ALTCAT | DSEX | Status | PARACAT | DAGECAT |
 |:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
-| **ALTCAT** | - |  |  |  |  |
+| **ALTCAT** | - | (Low/High&Moderate) vs (M/F) |  |  |  |
 | **DSEX** | - | - |  |  |  |
 | **Status** | - | - | - |  |  |
 | **PARACAT** | - | - | - | - |  |
