@@ -44,6 +44,7 @@ Design
 - Patient Malaria Status:
    * Uncomplicated
    * Asymptomatic
+
    (Has been determined to have no significant effect on parasite genetic differentiation [See fst 
     and hflk results])
 -----------------------
