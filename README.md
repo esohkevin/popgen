@@ -50,6 +50,14 @@ Design
 -----------------------
 \*\*\* main analysis category
 
+Possible Combinations
+----
+|	| ALTCAT | DSEX | Status | PARACAT |:- DAGECAT -:|
+| ALTCAT |  |  |  |  |  |
+| DSEX |  |  |  |  |  |
+| Status |  |  |  |  |  |
+| PARACAT |  |  |  |  |  |
+| DAGECAT |  |  |  |  |  |
 
 Data Stratification
 ----
