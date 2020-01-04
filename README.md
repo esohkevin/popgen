@@ -52,7 +52,9 @@ Design
 
 Possible Combinations
 ----
-| Level	| ALTCAT | DSEX | Status | PARACAT |:- DAGECAT -:|
+
+| Level	| ALTCAT | DSEX | Status | PARACAT | DAGECAT |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
 | ALTCAT |  |  |  |  |  |
 | DSEX |  |  |  |  |  |
 | Status |  |  |  |  |  |
