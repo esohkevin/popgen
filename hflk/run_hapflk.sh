@@ -21,7 +21,7 @@ else
    
    seq $lc $uc | parallel echo "hapflk-clusterplot.R flkout/${ohflk}{}flk.kfrq.fit_1.bz2" | xargs -P5 -n2 Rscript
    
-   #seq 1 14 | parallel echo "scaling_chi2_hapflk.py ... " | xargs -P5 -n2 Rscript
+   seq $lc $uc | parallel echo "scaling_chi2_hapflk.py flkout/${ohflk}{}flk.hapflk 15 3" | xargs -P5 -n4 python
    # conda search statsmodels # You need this to run scaling_chi2...py
 
 fi
