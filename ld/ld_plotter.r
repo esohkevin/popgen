@@ -10,15 +10,15 @@
 ####################################
 
 args <- commandArgs(TRUE)
-if (length(args) < 4) {
+if (length(args) < 5) {
    print("",quote=F)
-   print("Usage: ld_plotter.r [#CHR] [nbins] [binsize] [out-pic-name]",quote=F)
+   print("Usage: ld_plotter.r [#CHR] [nbins] [binsize] [data-dir] [out-pic-name]",quote=F)
    print("NB: binsize*nbins >= 200,000", quote=F)
    print("",quote=F)
    quit(save="no")
 } else if (as.numeric(args[2])*as.numeric(args[3]) < 200000) {
         print("",quote=F)
-	print("Usage: ld_plotter.r [#CHR] [binsize] [nbins] [out-pic-name]",quote=F)
+	print("Usage: ld_plotter.r [#CHR] [binsize] [nbins] [data-dir] [out-pic-name]",quote=F)
 	print("Sorry, binsize*nbins must be >= 200,000", quote=F)
 	print("",quote=F)
 	quit(save="no")
@@ -30,7 +30,8 @@ if (length(args) < 4) {
    nchr <- as.numeric(args[1])
    nbins <- as.numeric(args[2])
    binsize <- as.numeric(args[3])
-   outpng <- args[4]
+   ddir <- args[4]
+   outpng <- args[5]
 
    # Function calculates distance, plots a decay line
    plot.bin <- function(LDdf, nbins, binsize, color) {
@@ -92,12 +93,12 @@ if (length(args) < 4) {
    #############################################
    ############ LOAD DATA & PLOT IT ############
    #############################################
-   bootstrap_names <- list.files("bootstrap/ld", pattern="*hap.ld", full.names=TRUE)
+   bootstrap_names <- list.files(paste0(ddir,"/bootstrap/ld"), pattern="*hap.ld", full.names=TRUE)
    bootstrap_files <- lapply(bootstrap_names, read.table, header = TRUE)
 
    ## Determine miximum LD across all CHR to set ylim
    for (i in 1:nchr) {
-      f <- paste0("pointestimates/ld/chr",i,".ld.1-100000.hap.ld")
+      f <- paste0(ddir,"/pointestimates/ld/chr",i,".ld.1-100000.hap.ld")
       ld <- fread(f, header=T, data.table=F, nThread = 10)
       colnames(ld) <- c("CHR", "POS1", "POS2", "N_CHR", "R.2", "D", "Dprime")
       if (i==1) {
@@ -129,7 +130,7 @@ if (length(args) < 4) {
    ## Plot pointestimates
    for (i in 1:nchr) {
       pcol <- qualitative_hcl(nchr, "Dark2")
-      f <- paste0("pointestimates/ld/chr",i,".ld.1-100000.hap.ld")
+      f <- paste0(ddir,"/pointestimates/ld/chr",i,".ld.1-100000.hap.ld")
       print(paste0("Now Loading chromosome ",i), quote=F)
       ld <- fread(f, header=T, data.table=F, nThread = 10)
       colnames(ld) <- c("CHR", "POS1", "POS2", "N_CHR", "R.2", "D", "Dprime")
