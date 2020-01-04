@@ -1,21 +1,28 @@
 #!/bin/bash
 
-./prep.R pop10.txt merged
-mv merged.bim mergedflk.bim
-mv merged.bed mergedflk.bed
+if [[ $# != 6 ]]; then
+   echo """
+	Usage: bash -i run_hflk.sh <flk-data-prfx> <hflk-data-prfx> <from-chr> <to-chr> <ncpu> <K>
 
-hapflk --bfile mergedflk -p flkout/merged 	#--outgroup=Cambodia
-flkman.R merged_tree.txt merged.flk
+	x-data-prfx must be plink binary format (x.bim + x.bed + x.fam)
+	K: Number of baplotype clusters to use (e.g. 15)
+	NB: Please specify data path. Results will be saved in 'flkout'
+   """
+else
+   source activate py2
+   mkdir -p flkout
+   flk=$1; hflk=$2; lc=$3; uc=$4; oflk=$(basename $flk); ohflk=$(basename $hflk) ncpu=$5; k=$6
 
-for chr in {1..14}; do 
-   ./prep.R pop10.txt chr${chr};
-   mv chr${chr}.bed chr${chr}flk.bed
-   mv chr${chr}.bim chr${chr}flk.bim
-done
+   #--outgroup=Cambodia
+   hapflk --bfile $flk -p flkout/$oflk
+   flkman.R flkout/${oflk}_tree.txt flkout/$oflk.flk
+   
+   seq $lc $uc | parallel echo "--bfile ${hflk}{}flk -K $k --nfit\=2 --ncpu\=$ncpu --kinship flkout/${oflk}_fij.txt --kfrq -p flkout/${ohflk}{}flk" | xargs -P5 -n11 hapflk
+   
+   seq $lc $uc | parallel echo "hapflk-clusterplot.R flkout/${ohflk}{}flk.kfrq.fit_1.bz2" | xargs -P5 -n2 Rscript
+   
+   #seq 1 14 | parallel echo "scaling_chi2_hapflk.py ... " | xargs -P5 -n2 Rscript
+   # conda search statsmodels # You need this to run scaling_chi2...py
 
-seq 1 14 | parallel echo '--bfile chr{}flk -K 15 --nfit=2 --ncpu=2 --kinship flkout/merged_fij.txt --kfrq -p flkout/chr{}flk' | xargs -P5 -n11 hapflk
+fi
 
-seq 1 14 | parallel echo 'hapflk_clusterplot.R chr7flk.kfrq.fit_1.bz2' | xargs -P5 -n2 Rscript
-
-#seq 1 14 | parallel echo 'scaling_chi2_hapflk.py ... ' | xargs -P5 -n2 Rscript
-# conda search statsmodels # You need this to run scaling_chi2...py

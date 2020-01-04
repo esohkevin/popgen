@@ -5,7 +5,9 @@ args <- commandArgs(TRUE)
 if (length(args) < 2) {
    print("",quote=F)
    print("Usage: prep.R [pop-file] [data-prfx]", quote=F)
+   print("pop-file is a file with three columns [FID IID POP] (NB: No header)", quote=F)
    print("",quote=F)
+   quit(save="no")
 } else {
    if(!require(data.table))
 	   install.packages('data.table', 
