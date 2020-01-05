@@ -31,7 +31,7 @@ if (length(args) < 5) {
    nbins <- as.numeric(args[2])
    binsize <- as.numeric(args[3])
    ddir <- args[4]
-   outpng <- args[5]
+   outpng <- paste0(gsub(".png","",args[5]),"bin",binsize,".png")
 
    # Function calculates distance, plots a decay line
    plot.bin <- function(LDdf, nbins, binsize, color) {
