@@ -41,9 +41,51 @@ if [[ $# == 5 ]]; then
     echo -e "\n\e[38;5;40mNow generating plots for per individual missingness in R. Please wait...\e[0m\n"
     
     Rscript indmissing.R $Lhet $Uhet ${bname/.vcf*/}
+
+    #--------------------------------------------------------------------------------------
+    #-------- Extract a subset of frequent individuals to produce an IBD 
+    #-------- report to check duplicate or related individuals baseDird on autosomes
+    plink1.9 \
+    	--vcf ${in_vcf} \
+    	--autosome \
+    	--maf 0.2 \
+    	--geno 0.05 \
+    	--hwe 1e-8 \
+    	--allow-no-sex \
+    	--make-bed \
+    	--out frequent
     
+    #-------- Prune the list of frequent SNPs to remove those that fall within 
+    #-------- 50bp with r^2 > 0.2 using a window size of 5bp
+    plink1.9 \
+    	--bfile frequent \
+    	--allow-no-sex \
+    	--indep-pairwise 50 10 0.5 \
+    	--out prunedsnplist
+    
+    #-------- Now generate the IBD report with the set of pruned SNPs 
+    #-------- (prunedsnplist.prune.in - IN because they're the ones we're interested in)
+    plink1.9 \
+    	--bfile frequent \
+    	--allow-no-sex \
+    	--extract prunedsnplist.prune.in \
+    	--genome \
+    	--out genome
+    
+    echo -e """\e[38;5;40m
+    	#########################################################################
+    	#              Perform IBD analysis (relatedness) in R                  #
+    	#########################################################################
+    	\e[0m
+    	"""
+    echo -e "\n\e[38;5;40mNow generating plots for IBD analysis in R. Please wait...\e[0m"
+    
+    R CMD BATCH ibdana.R
+    #----------------------------------------------------------------------------------------
+
+
     #------- Merge IDs of all individuals that failed per individual qc
-    cat ${bname/.vcf*/}_fail-het.qc ${bname/.vcf*/}_fail-mis.qc | sort | uniq > ${bname/.vcf*/}_fail-ind.qc
+    cat ${bname/.vcf*/}_fail-het.qc ${bname/.vcf*/}_fail-mis.qc duplicate.ids2 | sort | uniq > ${bname/.vcf*/}_fail-ind.qc
     
     #-------- Remove individuals who failed per individual QC
     plink1.9 \
@@ -99,7 +141,7 @@ if [[ $# == 5 ]]; then
 	--export vcf-4.2 id-paste=fid bgz \
 	--out ${out_vcf}
 
-    rm temp*
+    rm temp* duplicate* frequent* genome* prunedsnplist*
 else
     echo """
 	Usage:./qc-pipeline.sh <in-vcf> <Lhet> <Uhet> <maf-thresh> <geno-thresh>
