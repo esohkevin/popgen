@@ -1,4 +1,4 @@
-In this Repos
+In this Repo
 ---
 - **raw**: Raw data
 - **qc**: Scripts for quality control
@@ -17,7 +17,7 @@ In this Repos
 - **recomb**: Fine-scale recombination map computation
 - **fws**: Complexity/Multiplicity of infection (for Plasmodium parasite analysis)
 ------------------------------
-Many of the packages usd to perform various analyses are not available for 
+Many of the packages used to perform various analyses are not available for 
 either the default python installation (2 or 3) or R version. Therefore, 
 several anaconda environments were created to handle package incompatibility 
 issues. Below are `yml` files for the environments used to handle all packges 
