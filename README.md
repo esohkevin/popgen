@@ -23,7 +23,17 @@ several anaconda environments were created to handle package incompatibility
 issues. Below are `yml` files for the environments used to handle all packges 
 necessary to perform all analyses in this repo.
 
+- R.yml
+- R2.yml
+- R3.yml
+- eigen.yml
+- py2.yml
+- py3.yml
 
+Create identical env from the `yml` files
+```
+conda env create -f [].yml 
+```
 
 General Usage
 ---

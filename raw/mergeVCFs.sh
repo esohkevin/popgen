@@ -21,6 +21,6 @@ else
 	Usage: ./plafMerge.sh <file> <output>
 
 	  file: A list containing the VCF file names, one per line
-	output: Output file name (only prefix: e.g. Plaf)
+	output: Output file name prefix
    """
 fi
