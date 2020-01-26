@@ -29,22 +29,6 @@ duplicate2=genome[mean_ibd > 1.98, ] # Equivalent to Z2 > 0.98. Apparently, ther
 write.table(duplicate2, file = "duplicates.txt", col.names = T, row.names = F, quote = F)
 sibs=genome[mean_ibd == 1, ]
 
-### Color code IBD plot ###
-#png("ibd_colcode.png", res=1200, height = 5, width = 6, units = "in")
-#png(filename = "ibd_colcode.png", width = 480, height = 600, units = "px", pointsize = 12,
-#    bg = "white",  res = NA, type = c("quartz"))
-#par(mfrow=c(1,1))
-#with(genome, plot(Z0,Z1, xlim = c(0,1), ylim = c(0,1), type = "n", pch=20))
-#with(subset(genome,RT=="FS"), points(Z0,Z1, col=3))
-#with(subset(genome,RT=="HS"), points(Z0,Z1, col="darkorange"))
-#with(subset(genome,RT=="OT"), points(Z0,Z1, col=4))
-#with(subset(genome,RT=="PO"), points(Z0,Z1, col=2))
-#with(subset(genome,RT=="UN"), points(Z0,Z1, col=1))
-#with(subset(genome,RT=="OT"), points(Z0,Z1, col=4))
-#with(subset(genome,RT=="HS"), points(Z0,Z1, col="darkorange"))
-#legend(1,1, xjust = 1, yjust = 1, legend = levels(genome$RT), pch = 16, col = c(3, "darkorange", 4,2,1))
-#dev.off()
-
 # Extract IDs of the duplicate pairs and check in the original data set to see which have a lower call rate)
 write.table(duplicate2[,1:2], file = "duplicate.ids1", col.names = F, row.names = F, quote = F, sep = "\t")
 write.table(duplicate2[,3:4], file = "duplicate.ids2", col.names = F, row.names = F, quote = F, sep = "\t") # Has the higer missingness

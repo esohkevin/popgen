@@ -36,8 +36,14 @@ else
    --include 'FILTER="PASS" && N_ALT=1 && TYPE="snp" && RegionType="Core" && RegionType!="SubtelomericHypervariable" && VQSLOD>0.0' \
    --threads 10 \
    --output-type z \
-   --output-file pass_core_${vcf} \
+   --output-file pc_${vcf} \
    ${vcf}
+   bcftools view \
+   --threads 15 \
+   -e 'RegionType=="SubtelomericHypervariable" || RegionType=="SubtelomericHypervariable"' \
+   --output-type z \
+   --output-file pass_core_${vcf} \
+   pc_${vcf}
    bcftools index --tbi pass_core_${vcf}
    
    # To create a vcf file which contains only PASS bi-allelic core SNPs and INDELS with

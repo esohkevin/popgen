@@ -40,9 +40,32 @@ Design
 - Age & Gender: Influence parasitemia via immunity
    * Analize by age group
    * Analize by gender
+
+- Patient Malaria Status:
+   * Uncomplicated
+   * Asymptomatic
+
+   (Has been determined to have no significant effect on parasite genetic differentiation [See fst 
+    and hflk results])
 -----------------------
 \*\*\* main analysis category
 
+Possible Combinations
+----
+
+| Level	| ALTCAT | DSEX | Status | PARACAT | DAGECAT |
+|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|
+| **ALTCAT** | - | (Low/High&Moderate) vs (M/F) |  |  |  |
+| **DSEX** | - | - |  |  |  |
+| **Status** | - | - | - |  |  |
+| **PARACAT** | - | - | - | - |  |
+| **DAGECAT** | - | - | - | - | - |
+-----------------------
+_ALTCAT=altitupe category, 
+DSEX=donor age, 
+Status=donor malaria status, 
+PARACAT=parasite category,
+DAGECAT=donor age category_
 
 Data Stratification
 ----
