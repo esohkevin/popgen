@@ -65,13 +65,19 @@ Run qc pipeline
 PCA (/eig)
 -----
 /CONVERTF
+```
 ./convertf_all.sh
+```
 
 /EIGENSTRAT
+```
 ./run_eigenstrat.perl
+```
 
 /POPGEN
+```
 ./run_popgenstats.sh
+```
 
 iHS (/ihs)
 -----
