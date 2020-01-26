@@ -39,7 +39,7 @@ General Usage
 ---
 Merge single chromosomes into one file
 ```
-./mergePlaf.sh <file> <output>
+./mergeVCFs.sh <file> <output>
 ``` 
 
 Update chromosome and snp IDs so that plink does not spill out errors
