@@ -1,10 +1,12 @@
 #!/bin/bash
 
+ldhel="${HOME}/Git/popgen/recomb/ldhel/"
+
 if [[ $1 == "ldhat" ]]; then
 
     if [[ $# == [45] ]]; then
         
-        mkdir -p ldhat
+        #mkdir -p ldhat
         in_vcf="$2"
         chr=$3
         famfile="$4"
@@ -17,7 +19,7 @@ if [[ $1 == "ldhat" ]]; then
             --phased \
             --ldhat \
             --keep ${famfile} \
-            --out ldhat/${out}chr${chr}
+            --out ${ldhat}${out}chr${chr}
         done
 
 	echo """
@@ -35,7 +37,7 @@ elif [[ $1 == "ldhelmet" ]]; then
 
     if [[ $# == [45] ]]; then
     
-        mkdir -p ldhel
+        #mkdir -p ldhel
         in_vcf="$2"
         chr=$3
         famfile="$4"
@@ -48,9 +50,10 @@ elif [[ $1 == "ldhelmet" ]]; then
             --phased \
             --ldhelmet \
             --keep ${famfile} \
-            --out ldhel/${out}chr${chr}
+            --out ${ldhel}${out}chr${chr}
         done
-
+	for i in ${ldhel}${out}chr*.log; do echo ${i/.log/}; done > ${ldhel}${out}.ldhel.input.list
+	echo ${ldhel}${out}chr > ${ldhel}${out}.ldhel.combined.input.list
         echo """
                 Done! All files saved in the directory 'ldhel'
         """
