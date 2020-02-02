@@ -25,7 +25,7 @@ if (length(args) < 2) {
     fwsplot <- gsub(".vcf.gz","_fws_plot.png",vcf)
     thr <- threads
     
-    # Load required packages. Try installing them if not installed
+    # Load require packages try installing them if not installed
     if (!require(SeqArray)) {
       print(paste0("Package 'SeqArray' could not be found! Attempting installation..."), quote = F)
       install.packages("SeqArray", repos = 'https://cloud.r-project.org', ask = F, dependencies = T)
@@ -38,11 +38,7 @@ if (length(args) < 2) {
     }
     if (!require(moimix)) {
       print(paste0("Package 'moimix' could not be found! Attempting installation..."), quote = F)
-      if (!require(devtools)) {
-	  print(paste0("Attempting installation of 'devtools' required to install 'moimix'..."), quote = F)
-          install.packages("devtools", repos = 'https://cloud.r-project.org', ask = F, dependencies = T)
-      }
-      devtools::install_github("bahlolab/moimix")
+      install.packages("moimix", repos = 'https://cloud.r-project.org', ask = F, dependencies = T)
       require(moimix)
     }
     if (!require(parallel)) {
@@ -151,7 +147,7 @@ if (length(args) < 2) {
     
     # Close GDS connection and remove GDS file from hard drive
     seqClose(isolates)
-    unlink(c("moi.gds"), force=TRUE)
+    #unlink(c("moi.gds"), force=TRUE)
   }
   
   moi(vcf = invcf, threads = thr)
