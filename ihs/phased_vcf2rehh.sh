@@ -30,6 +30,7 @@ if [[ $data == "sub" ]]; then
                        # chromosome region
                        plink2 \
 			--aec \
+			--snps-only just-acgt \
                        	--chr $3 \
                        	--export hapslegend \
 			--keep-allele-order \
@@ -60,6 +61,7 @@ if [[ $data == "sub" ]]; then
                        # Entire chromosome
                        plink2 \
                          --aec \
+			 --snps-only just-acgt \
                          --chr $3 \
                          --export hapslegend \
                          --vcf $5 \
@@ -90,6 +92,7 @@ if [[ $data == "sub" ]]; then
                 	      # Entire dataset with more than one chromosomes             
                                 plink2 \
 	                          --aec \
+				  --snps-only just-acgt \
                                   --export hapslegend \
                                   --vcf $6 \
 				  --keep-allele-order \
@@ -152,6 +155,7 @@ elif [[ $data == "all" ]]; then
                         # chromosome region
                         plink2 \
 			      --aec \
+			      --snps-only just-acgt \
                               --chr $3 \
                               --export hapslegend \
                               --vcf $8 \
@@ -181,6 +185,7 @@ elif [[ $data == "all" ]]; then
                         # Entire chromosome
                         plink2 \
                           --aec \
+			  --snps-only just-acgt \
                           --chr $4 \
                           --export hapslegend \
                           --vcf $5 \
@@ -210,6 +215,7 @@ elif [[ $data == "all" ]]; then
 			 # Entire dataset with more than one chromosomes
                          plink2 \
                            --aec \
+			   --snps-only just-acgt \
                            --export hapslegend \
                            --vcf $5 \
                	           --chr $chr \
