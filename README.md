@@ -94,4 +94,3 @@ Run scan for selection
 ```
 
 Just hit 'enter' and the script will guide you through
-
