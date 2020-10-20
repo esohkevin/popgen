@@ -5,7 +5,7 @@ if [[ $# != 5 ]]; then
 	Usage: ./getbim.sh <in-vcf> <ld-thresh> <from-chr> <to-chr> <sample-file>
    """
 else
-   dname=$(basename $0)
+   dname=$(dirname $0)
    mkdir -p data
    invcf=$1; ld=$2; lc=$3; uc=$4; s=$5; bname=$(basename $s) out=${bname/.*/}
    plink --vcf $invcf --aec --keep-allele-order --indep-pairwise 50 10 $ld --out temp
