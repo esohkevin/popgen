@@ -94,3 +94,9 @@ Run scan for selection
 ```
 
 Just hit 'enter' and the script will guide you through
+
+Resources
+---
+- https://github.com/popgenmethods/smcpp
+- https://github.com/lh3/psmc
+- https://www.palamaralab.org/software/ASMC#tools

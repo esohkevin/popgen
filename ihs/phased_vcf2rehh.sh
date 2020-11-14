@@ -1,15 +1,16 @@
 #!/bin/bash
 
 data="$1"
-proga='./helpmsg.sh 1'
-progb='./helpmsg.sh 2'
-progc='./helpmsg.sh 3'
-progd='./helpmsg.sh 4'
-proge='./helpmsg.sh 5'
-progf='./helpmsg.sh 6'
-progg='./helpmsg.sh 7'
-progh='./helpmsg.sh 8'
-progi='./helpmsg.sh -h'
+dname=$(dirname $0)
+proga='${dname}/helpmsg.sh 1'
+progb='${dname}/helpmsg.sh 2'
+progc='${dname}/helpmsg.sh 3'
+progd='${dname}/helpmsg.sh 4'
+proge='${dname}/helpmsg.sh 5'
+progf='${dname}/helpmsg.sh 6'
+progg='${dname}/helpmsg.sh 7'
+progh='${dname}/helpmsg.sh 8'
+progi='${dname}/helpmsg.sh -h'
 
 if [[ $data == "sub" ]]; then
 
