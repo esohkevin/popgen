@@ -101,3 +101,4 @@ Resources
 - https://github.com/lh3/psmc
 - https://www.palamaralab.org/software/ASMC#tools
 - https://github.com/statgen/locuszoom
+- https://paldhous.github.io/ucb/2015/dataviz/week7.html
