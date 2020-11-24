@@ -101,3 +101,6 @@ Resources
 - https://github.com/lh3/psmc
 - https://www.palamaralab.org/software/ASMC#tools
 - https://github.com/Genotek/ClassifyCNV
+- https://github.com/VCCRI/VPOT/
+- https://github.com/KHP-Informatics/DNAscan
+
