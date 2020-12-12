@@ -1,0 +1,5 @@
+Determine Plasmodium parasite species/strain in multiclonal samples:
+- Determine multiclonal+polyclonal samples
+- Extract cytb genomic coordinates
+- Convert per sample cytb to amino acids
+- Perfrom BLAST and phylogenetic analysis
