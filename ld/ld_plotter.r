@@ -115,10 +115,10 @@ if (length(args) < 5) {
    png(outpng, height=540, width=560, units='px', points=12, res=NA)
    plot(0,
 	#ld$POS2-ld$POS1, ld$R.2,
-        type = "n", xlim = c(0,100000), ylim = c(0,ld.max), axes = FALSE, 
+        type = "n", xlim = c(0,25000), ylim = c(0,ld.max), axes = FALSE, 
 	main=paste0("LD bin size: ", binsize),
         xlab = "Pairwise Coordinate Distance", ylab = expression(italic(r^2)))
-   axis(1, at = c(0, 25000, 50000, 75000, 100000))
+   axis(1, at = c(0, 5000, 10000, 20000, 25000))
    axis(2, las = 2)
 
    ## Slim bootstraps
