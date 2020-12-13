@@ -112,13 +112,14 @@ if (length(args) < 5) {
    #chr.max.ld <- unique(ld[ld$R.2==ld.max]$CHR)
 
    ## Setup plot coordinates
-   png(outpng, height=540, width=560, units='px', points=12, res=NA)
+   pdf(outpng, width = 6, height = 8, pointsize = 13, colormodel="cmyk", paper="A4")
+   #png(outpng, height=540, width=560, units='px', points=12, res=NA)
    plot(0,
 	#ld$POS2-ld$POS1, ld$R.2,
-        type = "n", xlim = c(0,100000), ylim = c(0,ld.max), axes = FALSE, 
+        type = "n", xlim = c(0,25000), ylim = c(0,ld.max), axes = FALSE, 
 	main=paste0("LD bin size: ", binsize),
         xlab = "Pairwise Coordinate Distance", ylab = expression(italic(r^2)))
-   axis(1, at = c(0, 25000, 50000, 75000, 100000))
+   axis(1, at = c(0, 5000, 10000, 20000, 25000))
    axis(2, las = 2)
 
    ## Slim bootstraps
@@ -146,7 +147,7 @@ if (length(args) < 5) {
       print("Done!", quote=F)
       print("", quote=F)
    }
-   legend(35000, ld.max-0.01, 
+   legend(5000, ld.max-0.01, 
           legend = c("Chr1", "Chr2", "Chr3", "Chr4", "Chr5", 
    		  "Chr6", "Chr7", "Chr8", "Chr9", "Chr10", 
    		  "Chr11", "Chr12", "Chr13", "Chr14", "Bootstraps"),
