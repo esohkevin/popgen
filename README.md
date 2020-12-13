@@ -100,3 +100,9 @@ Resources
 - https://github.com/popgenmethods/smcpp
 - https://github.com/lh3/psmc
 - https://www.palamaralab.org/software/ASMC#tools
+- https://github.com/statgen/locuszoom
+- https://paldhous.github.io/ucb/2015/dataviz/week7.html
+- https://figshare.com/articles/Code_and_metadata_Genetic_architecture_and_selective_sweeps_after_polygenic_adaptation_to_distant_trait_optima/6179219
+- https://github.com/Genotek/ClassifyCNV
+- https://github.com/VCCRI/VPOT/
+- https://github.com/KHP-Informatics/DNAscan
