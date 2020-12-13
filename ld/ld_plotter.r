@@ -146,7 +146,7 @@ if (length(args) < 5) {
       print("Done!", quote=F)
       print("", quote=F)
    }
-   legend(35000, ld.max-0.01, 
+   legend(5000, ld.max-0.01, 
           legend = c("Chr1", "Chr2", "Chr3", "Chr4", "Chr5", 
    		  "Chr6", "Chr7", "Chr8", "Chr9", "Chr10", 
    		  "Chr11", "Chr12", "Chr13", "Chr14", "Bootstraps"),
