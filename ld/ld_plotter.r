@@ -112,7 +112,8 @@ if (length(args) < 5) {
    #chr.max.ld <- unique(ld[ld$R.2==ld.max]$CHR)
 
    ## Setup plot coordinates
-   png(outpng, height=540, width=560, units='px', points=12, res=NA)
+   pdf(outpng, width = 6, height = 8, pointsize = 13, colormodel="cmyk", paper="A4")
+   #png(outpng, height=540, width=560, units='px', points=12, res=NA)
    plot(0,
 	#ld$POS2-ld$POS1, ld$R.2,
         type = "n", xlim = c(0,25000), ylim = c(0,ld.max), axes = FALSE, 
