@@ -106,3 +106,4 @@ Resources
 - https://github.com/Genotek/ClassifyCNV
 - https://github.com/VCCRI/VPOT/
 - https://github.com/KHP-Informatics/DNAscan
+- Browning Lab Beagle Utilities: https://faculty.washington.edu/browning/beagle_utilities/utilities.html
