@@ -108,3 +108,4 @@ Resources
 - https://github.com/KHP-Informatics/DNAscan
 - Browning Lab Beagle Utilities: https://faculty.washington.edu/browning/beagle_utilities/utilities.html
 - ABC: https://cran.r-project.org/web/packages/abc/index.html
+- ARGweaver (ancestral recomb graph): https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4022496/
