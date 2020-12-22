@@ -110,3 +110,4 @@ Resources
 - ABC: https://cran.r-project.org/web/packages/abc/index.html
 - ARGweaver (ancestral recomb graph): https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4022496/
 - Balancing selection: https://github.com/ksiewert/BetaScan
+- Calculating selection: https://www.ucl.ac.uk/~ucbhdjm/courses/b242/MaintVar/MaintVar.html
