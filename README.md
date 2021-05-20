@@ -97,6 +97,7 @@ Just hit 'enter' and the script will guide you through
 
 Resources
 ---
+- karyoploteR: https://bernatgel.github.io/karyoploter_tutorial/
 - https://github.com/popgenmethods/smcpp
 - https://github.com/lh3/psmc
 - https://www.palamaralab.org/software/ASMC#tools
