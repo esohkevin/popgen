@@ -98,15 +98,15 @@ Just hit 'enter' and the script will guide you through
 Resources
 ---
 - karyoploteR: https://bernatgel.github.io/karyoploter_tutorial/
-- https://github.com/popgenmethods/smcpp
-- https://github.com/lh3/psmc
-- https://www.palamaralab.org/software/ASMC#tools
-- https://github.com/statgen/locuszoom
-- https://paldhous.github.io/ucb/2015/dataviz/week7.html
-- https://figshare.com/articles/Code_and_metadata_Genetic_architecture_and_selective_sweeps_after_polygenic_adaptation_to_distant_trait_optima/6179219
-- https://github.com/Genotek/ClassifyCNV
-- https://github.com/VCCRI/VPOT/
-- https://github.com/KHP-Informatics/DNAscan
+- SMCPP: https://github.com/popgenmethods/smcpp
+- PSMC: https://github.com/lh3/psmc
+- ASMC: https://www.palamaralab.org/software/ASMC#tools
+- LocusZoom: https://github.com/statgen/locuszoom
+- DataViz: https://paldhous.github.io/ucb/2015/dataviz/week7.html
+- Polygenic adaptation: https://figshare.com/articles/Code_and_metadata_Genetic_architecture_and_selective_sweeps_after_polygenic_adaptation_to_distant_trait_optima/6179219
+- ClassifyCNV: https://github.com/Genotek/ClassifyCNV
+- VPOT: https://github.com/VCCRI/VPOT/
+- DNAscan: https://github.com/KHP-Informatics/DNAscan
 - Browning Lab Beagle Utilities: https://faculty.washington.edu/browning/beagle_utilities/utilities.html
 - ABC: https://cran.r-project.org/web/packages/abc/index.html
 - ARGweaver (ancestral recomb graph): https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4022496/
@@ -115,3 +115,4 @@ Resources
 - pyrho (demography-aware ancestral recombination graph): https://github.com/popgenmethods/pyrho
 - mutation dating paper: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000586
 - mtDNA Evolution: https://academic.oup.com/mbe/article/17/6/951/1037844
+- NCBI HAPMAP: https://ftp.ncbi.nlm.nih.gov/hapmap/
