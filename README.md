@@ -116,3 +116,4 @@ Resources
 - mutation dating paper: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3000586
 - mtDNA Evolution: https://academic.oup.com/mbe/article/17/6/951/1037844
 - NCBI HAPMAP: https://ftp.ncbi.nlm.nih.gov/hapmap/
+- ENSEMBL FTP (GRCh37): http://ftp.ensembl.org/pub/grch37/release-104/gff3/homo_sapiens/
