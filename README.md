@@ -117,3 +117,5 @@ Resources
 - mtDNA Evolution: https://academic.oup.com/mbe/article/17/6/951/1037844
 - NCBI HAPMAP: https://ftp.ncbi.nlm.nih.gov/hapmap/
 - ENSEMBL FTP (GRCh37): http://ftp.ensembl.org/pub/grch37/release-104/gff3/homo_sapiens/
+- CODEML: Inference of Episodic Changes in Natural Selection Acting on Protein Coding Sequences via CODEML (https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/cpbi.2)
+- PAML: Detecting the Signatures of Adaptive Evolution in Protein-Coding Genes (https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/0471142727.mb1901s101)
