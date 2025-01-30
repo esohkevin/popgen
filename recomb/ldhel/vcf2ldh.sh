@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ldhel="${HOME}/Git/popgen/recomb/ldhel/"
+#ldhel="${HOME}/Git/popgen/recomb/ldhel/"
 
 if [[ $1 == "ldhat" ]]; then
 
@@ -50,10 +50,12 @@ elif [[ $1 == "ldhelmet" ]]; then
             --phased \
             --ldhelmet \
             --keep ${famfile} \
-            --out ${ldhel}${out}chr${chr}
+            --out ${out}chr${chr}
         done
-	for i in ${ldhel}${out}chr*.log; do echo ${i/.log/}; done > ${ldhel}${out}.ldhel.input.list
-	echo ${ldhel}${out}chr > ${ldhel}${out}.ldhel.combined.input.list
+	for i in ${out}chr*.log; do 
+	  echo ${i/.log/}; 
+        done >${out}.ldhel.input.list
+	echo ${out}chr > ${out}.ldhel.combined.input.list
         echo """
                 Done! All files saved in the directory 'ldhel'
         """
