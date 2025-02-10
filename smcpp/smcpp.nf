@@ -18,8 +18,8 @@ workflow {
       .combine(vcf)
       .set { sample_vcf }
 
-   //prepVcf(sample_vcf)
-   //   .set { sample_vcf }
+   prepVcf(sample_vcf)
+      .set { sample_vcf }
 
    /// YAAAYY NESTED TUPLES WORK!!! ///
 
@@ -140,7 +140,6 @@ process prepVcf {
          ${vcf[0]} | \
       bcftools \
          view \
-         -q 0.01 \
          -i 'AC>0' \
          --threads ${task.cpus} \
          -Oz | \
