@@ -181,6 +181,7 @@ process vcf2smc {
                vcf2smc \
                --mask \$(readlink ${vcf[1]}) \
                -d \$(awk '{print \$2}' ${sampleFile} | sed -n "\${j}p;\${j}p" | tr '\\n' ' ' | sed 's/ \$/\\n/g') \
+               -c 12000 \
                ${params.vcf} \
                chr${chrom}.${popName}.smc.dp\${j}.txt.gz \
                ${chrom} \
@@ -195,7 +196,7 @@ process vcf2smc {
             smc++ \
                vcf2smc \
                -d \$(awk '{print \$2}' ${sampleFile} | sed -n "\${j}p;\${j}p" | tr '\\n' ' ' | sed 's/ \$/\\n/g') \
-               -c 1000 \
+               -c 12000 \
                ${params.vcf} \
                chr${chrom}.${popName}.smc.dp\${j}.txt.gz \
                ${chrom} \
@@ -209,6 +210,7 @@ process vcf2smc {
          smc++ \
             vcf2smc \
             --mask \$(readlink ${vcf[1]}) \
+            -c 12000 \
             ${params.vcf} \
             chr${chrom}.${popName}.smc.txt.gz \
             ${chrom} \
@@ -219,7 +221,7 @@ process vcf2smc {
          """
          smc++ \
             vcf2smc ${params.vcf} \
-            -c 1000 \
+            -c 12000 \
             --cores ${task.cpus} \
             chr${chrom}.${popName}.smc.txt.gz \
             ${chrom} \
@@ -315,7 +317,7 @@ process plot {
 process plotlinear {
    tag "plotting linear estimates for ${popName}"
    label 'smcpp'
-   label 'smallMemory'
+   label 'plotMem'
    publishDir \
       path: "${params.output_dir}/output/", \
       mode: 'copy'
