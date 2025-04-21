@@ -1,0 +1,14 @@
+#!/usr/bin/env nextflow
+
+getBed() {
+	return \
+	  channel
+	    .fromFilePairs( params.bfile + "/*.{bed,bim,fam}", size: 3 )
+}
+
+
+getVcf() {
+	return \
+	  channel
+	    .fromPath( params.vcf )
+}
